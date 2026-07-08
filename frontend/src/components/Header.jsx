@@ -1,12 +1,40 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
 
 function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname;
 
   const isActive = (path) => currentPath === path;
+
+  const scrollToSection = (sectionId) => {
+    if (!sectionId || sectionId === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      const offset = 90;
+      const top = section.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
+  const handleNavClick = (event, sectionId) => {
+    event.preventDefault();
+
+    if (currentPath !== "/") {
+      navigate("/");
+      setTimeout(() => scrollToSection(sectionId), 120);
+      return;
+    }
+
+    scrollToSection(sectionId);
+  };
 
   return (
     <header className="shadow-sm sticky-top bg-white">
@@ -34,48 +62,69 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarMenu">
             <ul className="navbar-nav mx-auto gap-4">
               <li className="nav-item">
-                <Link className={`nav-link ${isActive("/") ? "active-link" : "text-secondary"}`} to="/">
+                <Link
+                  className={`nav-link ${isActive("/") ? "active-link" : "text-secondary"}`}
+                  to="/"
+                  onClick={(event) => handleNavClick(event, "home")}
+                >
                   Início
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className={`nav-link ${isActive("/about") ? "active-link" : "text-secondary"}`} to="/about">
+                <Link
+                  className="nav-link text-secondary"
+                  to="/"
+                  onClick={(event) => handleNavClick(event, "services")}
+                >
                   Serviços
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className={`nav-link ${isActive("/about") ? "active-link" : "text-secondary"}`} to="/about">
+                <Link
+                  className="nav-link text-secondary"
+                  to="/"
+                  onClick={(event) => handleNavClick(event, "about")}
+                >
                   Sobre Nós
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className={`nav-link ${isActive("/services") ? "active-link" : "text-secondary"}`} to="/services">
+                <Link
+                  className="nav-link text-secondary"
+                  to="/"
+                  onClick={(event) => handleNavClick(event, "team")}
+                >
                   Equipa
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className={`nav-link ${isActive("/contact") ? "active-link" : "text-secondary"}`} to="/contact">
+                <Link
+                  className="nav-link text-secondary"
+                  to="/"
+                  onClick={(event) => handleNavClick(event, "contact")}
+                >
                   Contactos
                 </Link>
               </li>
             </ul>
 
             <div className="d-flex gap-2 ms-lg-4">
-              <Link 
-                className="btn btn-login btn-md rounded-pill px-4 py-2 fw-semibold" 
+              <Link
+                className="btn btn-header-login btn-md rounded-pill px-4 py-2 fw-semibold"
                 to="/login"
               >
-                Iniciar Sessão
+                Entrar
               </Link>
-              <Link 
-                className="btn btn-register btn-md rounded-pill px-4 py-2 text-white fw-semibold shadow-sm" 
+            
+              <Link
+                className="btn btn-register btn-md rounded-pill px-4 py-2 text-white fw-semibold shadow-sm"
                 to="/register"
               >
-                Registo
+                Registar
               </Link>
             </div>
           </div>

@@ -2,6 +2,7 @@
 .home-page {
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .urgency-bar {

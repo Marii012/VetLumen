@@ -1,0 +1,88 @@
+.register-page {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* O ponto final estilizado do título */
+.logo-dot {
+  color: #78cc28;
+}
+
+.login-redirect {
+  color: #78cc28;
+}
+
+/* Caixas de input cinzentas muito suaves e arredondadas */
+.custom-input-box {
+  background-color: #f4f6f8;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  transition: all 0.2s ease;
+}
+
+.tiny-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* Input nativo limpo sem as bordas padrão do HTML/Bootstrap */
+.form-control-clean {
+  outline: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  padding: 2px 0;
+}
+
+/* Estado ativo/focado (como o input de password azul da imagem, mas usando o teu verde) */
+.active-input-box, .custom-input-box:focus-within {
+  background-color: #ffffff;
+  border-color: #78cc28;
+  box-shadow: 0 0 0 4px rgba(120, 204, 40, 0.1);
+}
+
+/* Botões redondos no fundo */
+.btn-light-gray {
+  background-color: #f0f2f5;
+  color: #7a828a;
+  border: none;
+  font-size: 0.85rem;
+}
+
+.btn-light-gray:hover {
+  background-color: #e4e7eb;
+}
+
+.btn-create {
+  background-color: #78cc28 !important;
+  border: 1px solid #78cc28 !important;
+  color: #fff !important;
+  font-size: 0.85rem;
+}
+
+.btn-create:hover {
+  background-color: #64b31e !important;
+  border-color: #64b31e !important;
+  color: #fff !important;
+}
+
+/* Painel de Imagem à Direita */
+.image-panel {
+  background-image: url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?q=80&w=1286&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Cães felizes na natureza */
+  background-size: cover;
+  background-position: center;
+}
+
+/* A Onda Vertical que faz o efeito fluido entre o formulário e a imagem */
+.vertical-wave {
+  position: absolute;
+  top: 0;
+  left: -1px; /* Evita fendas de rendering */
+  height: 100%;
+  width: 120px; /* Largura do efeito da curva */
+}
+
+.vertical-wave svg {
+  width: 100%;
+  height: 100%;
+}

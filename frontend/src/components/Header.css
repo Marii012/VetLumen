@@ -14,7 +14,7 @@ header {
 
 
 .logo-color {
-  color: #78cc28;
+  color: #78cc28 !important; 
 }
 
 
@@ -51,28 +51,32 @@ header {
     width: 100%;
 }
 
-/* Botão de Login (Contorno Verde) */
-.btn-login {
-  color: #32b632;
-  border: 2px solid #32b632;
-  background-color: transparent;
+.btn-header-login {
+  color: #78cc28 !important;
+  background-color: transparent !important;
+  border: 2px solid #78cc28 !important;
   transition: all 0.2s ease-in-out;
 }
 
-.btn-login:hover {
-  background-color: #32b632;
-  color: #ffffff;
+.btn-header-login:hover {
+  background-color: #78cc28 !important;
+  color: #fff !important;
 }
 
-/* Botão de Registo (Fundo Verde Sólido com o teu gradiente ou cor de destaque) */
+/* Botão Registar */
 .btn-register {
-  background-color: #78cc28;
-  border: 2px solid #78cc28;
-  transition: all 0.2s ease-in-out;
+  background-color: #78cc28 !important;
+  border: 2px solid #78cc28 !important;
+  color: #fff !important;
+  transition: all 0.25s ease-in-out !important;
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .btn-register:hover {
-  background-color: #64b31e;
-  border-color: #64b31e;
-  transform: translateY(-1px); /* Pequeno efeito de elevação ao passar o rato */
+  background-color: #64b31e !important;
+  border-color: #64b31e !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(120, 204, 40, 0.25);
 }

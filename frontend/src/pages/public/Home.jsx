@@ -72,7 +72,7 @@ function Home() {
       </div>
       
       {/* ================= HERO SECTION ================= */}
-      <section className="hero-section position-relative pt-3" data-aos="fade-up">
+      <section id="home" className="hero-section position-relative pt-3" data-aos="fade-up">
         <div className="container pt-lg-2">
           <div className="row align-items-center">
             
@@ -249,7 +249,7 @@ function Home() {
 
 
       {/* ================= ABOUT / FEATURES SECTION ================= */}
-      <section className="about-section py-5 my-4" data-aos="fade-up" data-aos-delay="100">
+      <section id="about" className="about-section py-5 my-4" data-aos="fade-up" data-aos-delay="100">
         <div className="container">
           <div className="row align-items-center">
             
@@ -363,7 +363,7 @@ function Home() {
               },
               {
                 image: "https://plus.unsplash.com/premium_photo-1661963377525-7b879630b497?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                name: "Marta Ferreira",
+                name: "Ana Rodrigues",
                 role: "Assistente Veterinária",
                 specialty: "Cuidados e acompanhamento"
               }
