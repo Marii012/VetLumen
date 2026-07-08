@@ -1,0 +1,78 @@
+header {
+    font-family: 'Poppins', sans-serif;
+}
+
+.top-bar {
+  background: linear-gradient(
+    90deg,
+    #32b632,
+    #1a8f1a
+  );
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
+}
+
+
+.logo-color {
+  color: #78cc28;
+}
+
+
+.active-link {
+    font-weight: 600;
+    color: #78cc28 !important;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: #78cc28 !important;
+    transform: translateY(-2px);
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: #78cc28;
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link:focus::after,
+.navbar-nav .nav-link.active-link::after {
+    width: 100%;
+}
+
+/* Botão de Login (Contorno Verde) */
+.btn-login {
+  color: #32b632;
+  border: 2px solid #32b632;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-login:hover {
+  background-color: #32b632;
+  color: #ffffff;
+}
+
+/* Botão de Registo (Fundo Verde Sólido com o teu gradiente ou cor de destaque) */
+.btn-register {
+  background-color: #78cc28;
+  border: 2px solid #78cc28;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-register:hover {
+  background-color: #64b31e;
+  border-color: #64b31e;
+  transform: translateY(-1px); /* Pequeno efeito de elevação ao passar o rato */
+}

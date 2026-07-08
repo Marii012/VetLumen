@@ -1,0 +1,133 @@
+.footer {
+    font-family: 'Poppins', sans-serif;
+    background: #fff;
+}
+
+/* Logo */
+.logo-color {
+    color: #78cc28;
+}
+
+/* Títulos */
+.footer-title {
+    color: #1a8f1a;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Texto */
+.footer p,
+.footer li {
+    color: #6c757d;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    text-align: left;
+}
+
+@media (max-width: 767.98px) {
+    .footer .row > div {
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .footer p,
+    .footer li {
+        text-align: center;
+    }
+
+    .footer .social-links {
+        justify-content: center !important;
+    }
+}
+
+/* Links */
+.footer-link {
+    color: #6c757d;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+
+/* Apenas os links da navegação */
+.footer-nav .footer-link:hover {
+    color: #32b632;
+    padding-left: 5px;
+}
+
+/* Ícones dos contactos */
+.footer p i {
+    color: #32b632;
+    margin-right: 10px;
+    width: 18px;
+}
+
+/* Redes sociais */
+.footer .social-links a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    background: #f5f5f5;
+    color: #32b632;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.2rem;
+
+    transition:
+        transform 0.35s cubic-bezier(.25,.8,.25,1),
+        color 0.35s ease,
+        box-shadow 0.35s ease;
+
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* camada do fundo animado */
+.footer .social-links a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(135deg, #32b632, #1a8f1a);
+
+    opacity: 0;
+    transition: opacity 0.35s ease;
+
+    border-radius: 50%;
+}
+
+
+.footer .social-links a i {
+    position: relative;
+    z-index: 1;
+}
+
+
+.footer .social-links a:hover {
+    color: white;
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(50, 182, 50, 0.25);
+}
+
+
+.footer .social-links a:hover::before {
+    opacity: 1;
+}
+
+/* Linha */
+.footer hr {
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Copyright */
+.footer .text-center {
+    font-size: .9rem;
+    color: #6c757d;
+}

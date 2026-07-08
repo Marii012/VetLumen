@@ -1,0 +1,415 @@
+/* Configuração Geral da Página */
+.home-page {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+.urgency-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(6px);
+  transform: translateY(0);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  opacity: 1;
+}
+
+.home-page .urgency-bar.is-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.urgency-bar .container {
+  min-height: 34px;
+}
+
+.urgency-normal {
+  background: linear-gradient(90deg, #eaf8da 0%, #f6fff0 100%);
+  color: #4f7c12;
+}
+
+.urgency-warning {
+  background: linear-gradient(90deg, #fff4d9 0%, #fff9eb 100%);
+  color: #9b6500;
+}
+
+.urgency-urgent {
+  background: linear-gradient(90deg, #ffe2e2 0%, #fff4f4 100%);
+  color: #a11f1f;
+}
+
+/* Cores Identificativas vindas do Header */
+.logo-color {
+  color: #78cc28;
+}
+
+/* Hero Section */
+.hero-section {
+  background-color: #f4f4f4 !important; /* Fundo cinza/esverdeado muito claro */
+  padding-top: 1rem;
+  padding-bottom: 90px;
+}
+
+.hero-img {
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* Forma orgânica aproximada à da imagem */
+}
+
+/* Botão de Destaque */
+.btn-hero {
+  background-color: #78cc28 !important;
+  border-color: #78cc28 !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-hero:hover,
+.btn-hero:focus,
+.btn-hero:active {
+  background-color: #64b31e !important;
+  border-color: #64b31e !important;
+  color: #ffffff !important;
+}
+
+/* Efeito de Curva no Fundo do Banner */
+.wave-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  line-height: 0;
+}
+
+/* Distintivo Flutuante do Contacto */
+.call-us-badge {
+  bottom: -10px;
+  z-index: 10;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+@media (max-width: 575.98px) {
+  .call-us-badge {
+    font-size: 13px;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    max-width: calc(100% - 1.5rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* ================= SERVICES SECTION ================= */
+
+.services-section {
+    background-color: #ffffff;
+}
+
+
+.services-subtitle {
+    max-width: 650px;
+    line-height: 1.7;
+}
+
+/* Cards */
+.service-card {
+    height: 100%;
+    padding: 40px 30px;
+    background: #ffffff;
+
+    border-radius: 35px 50px 35px 50px;
+
+    border: 1px solid rgba(120, 204, 40, 0.15);
+
+    transition: all 0.35s ease;
+
+    text-align: center;
+}
+
+.service-card:hover {
+    background: #f9fff7;
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.08);
+
+    border-color: rgba(120, 204, 40, 0.35);
+}
+
+/* Ícones */
+.service-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 45% 55% 55% 45%;
+
+    background-color: rgba(120, 204, 40, 0.12);
+
+    transition: transform 0.35s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.08) translateY(-3px);
+}
+
+
+.service-icon i {
+    font-size: 32px;
+    color: var(--logo-color);
+}
+
+
+/* Texto */
+.service-card h5 {
+    color: #1f2937;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+
+.service-card p {
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* Texto da secção de categorias */
+.categories-section .lead,
+.categories-section p {
+  max-width: 600px;
+  font-size: 15px;
+}
+
+/* Texto da secção sobre */
+.about-section .text-muted {
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.about-section .about-intro {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+/* Caixa de vantagens */
+.features-box {
+  max-width: 480px;
+}
+
+/* Categoria de Animais (Círculos) */
+.avatar-wrapper {
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+  transition: transform 0.2s ease;
+}
+
+.avatar-wrapper:hover {
+  transform: translateY(-5px);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+}
+
+/* Secção do Gato de Destaque */
+.main-cat-img {
+  max-height: 480px; /* Igualado ao hero para manter a proporção */
+  width: 100%;
+  object-fit: cover; /* Garante que a imagem preenche o corte sem distorcer */
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.feature-icon {
+  color: #78cc28;
+  font-size: 1.6rem;
+  filter: grayscale(0.2);
+}
+
+/* ================= TEAM SECTION ================= */
+
+.team-section {
+    background: #fcfffb;
+}
+
+
+.team-subtitle {
+    max-width: 650px;
+    line-height: 1.7;
+}
+
+
+.team-card {
+    background: white;
+
+    padding: 35px 30px;
+
+    text-align: center;
+
+    border-radius: 35px 50px 35px 50px;
+
+    border: 1px solid rgba(120, 204, 40, 0.15);
+
+    transition: 
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+
+.team-card:hover {
+    background: #f9fff7;
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.08);
+}
+
+
+.team-image {
+    width: 150px;
+    height: 150px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+
+    border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+
+    border: 4px solid rgba(120,204,40,.15);
+}
+
+
+.team-image img {
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-section {
+    background: #f4f4f4;
+    position: relative;
+    margin-top: 80px;
+}
+
+
+/* Onda no topo */
+.contact-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -80px;
+    left: 0;
+
+    width: 100%;
+    height: 100px;
+
+    background: #f4f4f4;
+
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+
+}
+
+.contact-subtitle {
+    max-width: 650px;
+}
+
+
+.contact-info,
+.contact-form {
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 35px 50px 35px 50px;
+
+    border: 1px solid rgba(120,204,40,.15);
+
+}
+
+.contact-form textarea {
+    min-height: 190px;
+    max-height: 250px;
+    resize: vertical;
+}
+
+
+.contact-item {
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+    color:#6b7280;
+
+}
+
+
+.contact-item i {
+
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:rgba(120,204,40,.12);
+
+    color:#78cc28;
+
+}
+
+
+.contact-form .form-control,
+.contact-form .form-select {
+
+    padding:14px 18px;
+
+    border-radius:18px;
+
+    border:1px solid #e5e7eb;
+
+}
+
+
+.contact-form .form-control:focus,
+.contact-form .form-select:focus {
+
+    border-color:#78cc28;
+
+    box-shadow:0 0 0 .2rem rgba(120,204,40,.15);
+
+}
