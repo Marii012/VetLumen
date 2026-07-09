@@ -1,14 +1,39 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
+import Select from "react-select";
 import "aos/dist/aos.css";
 import "./Home.css";
 
 function Home() {
-  const [urgencyInfo, setUrgencyInfo] = useState({
-    label: "Atendimento disponível",
-    icon: "bi-heart-pulse",
-    className: "urgency-normal",
-  });
+    const [urgencyInfo, setUrgencyInfo] = useState({
+      label: "Atendimento disponível",
+      icon: "bi-heart-pulse",
+      className: "urgency-normal",
+    });
+
+    const [countryCode, setCountryCode] = useState("+351");
+    const [phone, setPhone] = useState("");
+
+    const contactOptions = [
+    { value: "duvidas", label: "Esclarecimento de Dúvidas" },
+    { value: "consulta", label: "Consulta Geral" },
+    { value: "vacinacao", label: "Vacinação" },
+    { value: "desparasitacao", label: "Desparasitação" },
+    { value: "exames", label: "Exames e Diagnóstico" },
+    { value: "cirurgia", label: "Cirurgia" },
+    { value: "acompanhamento", label: "Acompanhamento" },
+  ];
+
+    const specieOptions = [
+    { value: "cao", label: "Cão" },
+    { value: "gato", label: "Gato" },
+    { value: "ave", label: "Ave" },
+    { value: "roedor", label: "Roedor" },
+    { value: "reptil", label: "Réptil" },
+    { value: "peixe", label: "Peixe" },
+    { value: "outro", label: "Outro" },
+  ];
+
   const [isUrgencyHidden, setIsUrgencyHidden] = useState(false);
 
     useEffect(() => {
@@ -122,7 +147,7 @@ function Home() {
       <section className="categories-section py-5 text-center mt-5" data-aos="fade-up" data-aos-delay="150">
         <div className="container">
           
-          <h2 className="fw-bold text-dark fs-2 mb-2">Cuidados para Todos os Companheiros</h2>
+          <h2 className="fw-bold text-dark fs-2 mb-2">Cuidados para Todos os Companheiros<span className="logo-dot">.</span></h2>
           <p className="text-muted mx-auto mb-5 font-light max-w-xl">
             Prestamos cuidados veterinários personalizados para diferentes espécies, garantindo o bem-estar de cada animal.
           </p>
@@ -133,7 +158,7 @@ function Home() {
             {[
               { name: "Gatos", img: "https://plus.unsplash.com/premium_photo-1673967831980-1d377baaded2?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
               { name: "Cães", img: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=150" },
-              { name: "Pássaros", img: "https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=150" },
+              { name: "Aves", img: "https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=150" },
               { name: "Roedores", img: "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=150" },
               { name: "Peixes", img: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=150" }
             ].map((pet, index) => (
@@ -161,11 +186,11 @@ function Home() {
             </span>
       
             <h2 className="fw-bold text-dark fs-2 mt-2">
-              Acompanhamento completo para o seu animal
+              Acompanhamento completo para o seu animal<span className="logo-dot">.</span>
             </h2>
       
             <p className="text-muted mx-auto services-subtitle">
-              Na PetCare disponibilizamos serviços veterinários personalizados,
+              Na VetLumen disponibilizamos serviços veterinários personalizados,
               garantindo o melhor acompanhamento para a saúde e bem-estar do seu animal.
             </p>
       
@@ -256,7 +281,7 @@ function Home() {
             {/* Bloco de Texto e Vantagens */}
             <div className="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-delay="150">
               <span className="logo-color fw-semibold fs-6">Sobre Nós</span>
-              <h2 className="fw-bold text-dark fs-2 mt-1 mb-4">VetLumen</h2>
+              <h2 className="fw-bold text-dark fs-2 mt-1 mb-4">VetLumen<span className="logo-dot">.</span></h2>
               
               <p className="text-muted about-intro font-light">
                 Na VetLumen, cuidamos dos animais com ciência e dedicação. O nosso nome representa
@@ -328,7 +353,7 @@ function Home() {
             </span>
       
             <h2 className="fw-bold text-dark fs-2 mt-2">
-              Profissionais dedicados ao cuidado do seu animal
+              Profissionais dedicados ao cuidado do seu animal<span className="logo-dot">.</span>
             </h2>
       
             <p className="text-muted mx-auto team-subtitle">
@@ -423,7 +448,7 @@ function Home() {
               </span>
         
               <h2 className="fw-bold text-dark fs-2 mt-2">
-                Estamos aqui para cuidar do seu animal
+                Estamos aqui para cuidar do seu melhor amigo<span className="logo-dot">.</span>
               </h2>
         
               <p className="text-muted mx-auto contact-subtitle">
@@ -513,11 +538,30 @@ function Home() {
         
         
                     <div className="col-md-6">
-                      <input 
-                        type="tel"
-                        className="form-control"
-                        placeholder="Telefone"
-                      />
+                      <div className="input-group">
+                    
+                        <input
+                          type="tel"
+                          className="form-control country-code"
+                          value={countryCode}
+                          maxLength={5}
+                          onChange={(e) =>
+                            setCountryCode(e.target.value.replace(/[^\d+]/g, ""))
+                          }
+                          placeholder="+351"
+                        />
+                    
+                        <input
+                          type="tel"
+                          className="form-control"
+                          placeholder="912345678"
+                          value={phone}
+                          onChange={(e) =>
+                            setPhone(e.target.value.replace(/\D/g, ""))
+                          }
+                        />
+                    
+                      </div>
                     </div>
         
         
@@ -528,43 +572,36 @@ function Home() {
                         placeholder="Nome do animal"
                       />
                     </div>
-        
-        
+
+                    {/* Dropdown - Biblioteca (react-select) */}
                     <div className="col-12">
-        
-                      <select className="form-select">
-                        <option>
-                          Motivo do contacto
-                        </option>
-                      
-                        <option>
-                          Consulta Geral
-                        </option>
-                      
-                        <option>
-                          Vacinação
-                        </option>
-                      
-                        <option>
-                          Desparasitação
-                        </option>
-                      
-                        <option>
-                          Exames e Diagnóstico
-                        </option>
-                      
-                        <option>
-                          Cirurgia
-                        </option>
-                      
-                        <option>
-                          Acompanhamento
-                        </option>
-                      
-                      </select>
-        
+                      <Select
+                        options={specieOptions}
+                        placeholder="Espécie do animal"
+                        maxMenuHeight={190}
+                        className="contact-select"
+                        classNamePrefix="contact-select"
+                      />
                     </div>
-        
+
+                    <div className="col-md-12">
+                      <input 
+                        type="text"
+                        className="form-control"
+                        placeholder="Raça do animal"
+                      />
+                    </div>
+
+                    {/* Dropdown - Biblioteca (react-select) */}
+                    <div className="col-12">
+                      <Select
+                        options={contactOptions}
+                        placeholder="Motivo do contacto"
+                        maxMenuHeight={190}
+                        className="contact-select"
+                        classNamePrefix="contact-select"
+                      />
+                    </div>
         
                     <div className="col-12">
         
