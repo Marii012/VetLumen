@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import Select from "react-select";
 import Swal from "sweetalert2";
-import axios from "axios";
+import api from "../../services/api";
 import "aos/dist/aos.css";
 import "./Home.css";
 
@@ -53,7 +53,7 @@ function Home() {
       try {
         setIsSubmitting(true);
 
-        await axios.post("http://localhost:3000/api/contacts", payload);
+        await api.post("/contacts", payload);
 
         Swal.fire({
           icon: "success",
@@ -156,9 +156,7 @@ function Home() {
   useEffect(() => {
     const loadContactReasons = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/contact-reasons"
-        );
+        const response = await api.get("/contact-reasons");
   
         const options = response.data.map((reason) => ({
           value: reason.id_contact_reason,
@@ -181,9 +179,7 @@ function Home() {
   
       try {
   
-        const response = await axios.get(
-          "http://localhost:3000/api/species"
-        );
+        const response = await api.get("/species");
   
         const options = response.data.map(specie => ({
           value: specie.id_species,
@@ -216,9 +212,7 @@ function Home() {
   
       try {
   
-        const response = await axios.get(
-          `http://localhost:3000/api/breeds/species/${selectedSpecies.value}`
-        );
+        const response = await api.get(`/breeds/species/${selectedSpecies.value}`);
   
         const options = response.data.map(breed => ({
           value: breed.id_breed,

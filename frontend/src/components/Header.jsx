@@ -146,6 +146,37 @@ function Header() {
   const isSectionActive = (sectionId) => 
     currentPath === "/" && activeSection === sectionId;
 
+  const getDashboardRoute = () => {
+    if (!user) return "/";
+  
+    switch (user.id_role) {
+      case 1:
+        return "/client/dashboard";
+  
+      case 2:
+        return "/vet/dashboard";
+  
+      case 3:
+        return "/admin/dashboard";
+  
+      default:
+        return "/";
+    }
+  };
+
+  const getRoleName = () => {
+    switch (user?.id_role) {
+      case 1:
+        return "Cliente";
+      case 2:
+        return "Veterinário";
+      case 3:
+        return "Administrador";
+      default:
+        return "";
+    }
+  };
+
 
 
   return (
@@ -200,7 +231,7 @@ function Header() {
           
               <div>
                 <h6>Olá, {user.first_name}</h6>
-                <span>Cliente</span>
+                <span>{getRoleName()}</span>
               </div>
           
             </div>
@@ -302,7 +333,7 @@ function Header() {
 
             <Link
               className="dropdown-item"
-              to="/client/dashboard"
+              to={getDashboardRoute()}
             >
               <i className="bi bi-person-fill-gear fs-4"></i>
 
@@ -339,7 +370,7 @@ function Header() {
         <hr />
 
         <Link
-          to="/client/dashboard"
+          to={getDashboardRoute()}
           className="mobile-user-link"
           onClick={closeMenu}
         >
@@ -365,25 +396,25 @@ function Header() {
 
     <div className="d-flex gap-2">
 
-      <Link
-        className="btn btn-header-login rounded-pill px-4 py-2 fw-semibold"
-        to="/login"
-      >
-        Entrar
-      </Link>
-
-      <Link
-        className="btn btn-register rounded-pill px-4 py-2 text-white fw-semibold shadow-sm"
-        to="/register"
-      >
-        Registar
-      </Link>
-
+          <Link
+            className="btn btn-header-login rounded-pill px-4 py-2 fw-semibold"
+            to="/login"
+          >
+            Entrar
+          </Link>
+    
+          <Link
+            className="btn btn-register rounded-pill px-4 py-2 text-white fw-semibold shadow-sm"
+            to="/register"
+          >
+            Registar
+          </Link>
+    
+        </div>
+    
+      )}
+    
     </div>
-
-  )}
-
-</div>
 
 
           </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
-import "./Profile.css";
+import "./VetProfile.css";
 
 const formatMemberSince = (createdAt) => {
   if (!createdAt) return "Não disponível";
@@ -167,7 +167,7 @@ const Profile = () => {
     }
   };
 
-    const getRoleName = (id_role) => {
+  const getRoleName = (id_role) => {
       switch (id_role) {
         case 1:
           return "Cliente";

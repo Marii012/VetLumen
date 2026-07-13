@@ -7,6 +7,7 @@ import Home from "./pages/public/Home";
 import Login from "./pages/public/Login";
 import Register from "./pages/public/Register";
 
+{/* Dashboard Cliente */}
 import ClientLayout from "./layouts/ClientLayout";
 import Dashboard from "./pages/client/DashboardClient";
 import Pets from "./pages/client/Pets";
@@ -21,11 +22,21 @@ import Profile from "./pages/client/Profile";
 import AddPetPage from "./pages/client/AddPetPage";
 import EditPetPage from "./pages/client/EditPetPage";
 
+{/* Dashboard Veterinário */}
+import VetLayout from "./layouts/VetLayout";
+import DashboardVet from "./pages/vet/DashboardVet";
+import VetAppointments from "./pages/vet/VetAppointments";
+import VetPatients from "./pages/vet/VetPatients";
+import VetProfile from "./pages/vet/VetProfile";
+import VetAddClinicalRecordPage from "./pages/vet/VetAddClinicalRecordPage";
+import VetFinalizeAppointmentPage from "./pages/vet/VetFinalizeAppointmentPage";
+
 function App() {
   const location = useLocation();
 
   const hideLayout =
   location.pathname.startsWith("/client") ||
+  location.pathname.startsWith("/vet") ||
   location.pathname === "/login" ||
   location.pathname === "/register";
 
@@ -52,6 +63,19 @@ function App() {
           <Route path="/client/pets/:id/history" element={<PetHistory />} />
           <Route path="/client/pets/:id/vaccines" element={<PetVaccines />} />
           <Route path="/client/profile" element={<Profile />} />
+        </Route>
+
+        {/* Dashboard Veterinário */}
+        <Route element={<VetLayout />}>
+          <Route path="/vet/dashboard" element={<DashboardVet />} />
+          <Route path="/vet/appointments" element={<VetAppointments />} />
+          <Route path="/vet/appointments/:id/finalize" element={<VetFinalizeAppointmentPage />} />
+          <Route path="/vet/patients" element={<VetPatients />} />
+          <Route path="/vet/patients/:id" element={<PetDetails />} />
+          <Route path="/vet/patients/:id/history" element={<PetHistory />} />
+          <Route path="/vet/patients/:id/vaccines" element={<PetVaccines />} />
+          <Route path="/vet/patients/:id/records/new" element={<VetAddClinicalRecordPage />} />
+          <Route path="/vet/profile" element={<VetProfile />} />
         </Route>
       </Routes>
 

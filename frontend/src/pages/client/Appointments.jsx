@@ -47,6 +47,7 @@ const Appointments = () => {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState(options[0]);
+  const [selectedDate, setSelectedDate] = useState("");
 
   const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:3000/api").replace(/\/api\/?$/i, "");
 
@@ -114,7 +115,10 @@ const Appointments = () => {
 
     const matchesStatus = status.value === "all" || appointment.status === status.value;
 
-    return matchesSearch && matchesStatus;
+    const appointmentDate = appointment.data ? String(appointment.data).slice(0, 10) : "";
+    const matchesDate = !selectedDate || appointmentDate === selectedDate;
+
+    return matchesSearch && matchesStatus && matchesDate;
   });
 
   const getBadgeClass = (statusValue) => {
@@ -293,6 +297,17 @@ const Appointments = () => {
             placeholder="Pesquisar consulta..."
             value={search}
             onChange={(event) => setSearch(event.target.value)}
+          />
+        </div>
+
+        <div className="date-filter-box">
+          <i className="bi bi-calendar3"></i>
+
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={(event) => setSelectedDate(event.target.value)}
+            aria-label="Filtrar por data"
           />
         </div>
 

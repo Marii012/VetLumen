@@ -79,7 +79,7 @@ function Login() {
             break;
   
           case 2: 
-            navigate("/veterinarian/dashboard");
+            navigate("/vet/dashboard");
             break;
   
           case 3: 

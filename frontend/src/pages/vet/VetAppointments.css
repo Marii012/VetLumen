@@ -828,6 +828,11 @@
 
 }
 
+.appointment-left h3 i,
+.appointment-left p i{
+    color:#78cc28;
+}
+
 .appointment-left p{
 
     margin:0 0 18px;
@@ -1023,6 +1028,38 @@
 
 /* cancelar */
 
+.confirm-btn{
+
+    padding:11px 20px;
+
+    border:1px solid #78cc28;
+
+    border-radius:12px;
+
+    background:#78cc28;
+
+    color:#ffffff;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.confirm-btn:hover{
+
+    background:#63b51f;
+
+    border-color:#63b51f;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 22px rgba(120,204,40,.28);
+
+}
+
 .cancel-btn{
 
     padding:11px 20px;
@@ -1048,6 +1085,40 @@
     background:#fff1f1;
 
     border-color:#dc3545;
+
+}
+
+/* concluir */
+
+.complete-btn{
+
+    padding:11px 20px;
+
+    border:1px solid #0ea5e9;
+
+    border-radius:12px;
+
+    background:#0ea5e9;
+
+    color:#ffffff;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.complete-btn:hover{
+
+    background:#0284c7;
+
+    border-color:#0284c7;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 22px rgba(14,165,233,.28);
 
 }
 
@@ -1172,7 +1243,9 @@
 ========================================================================== */
 
 .details-btn,
+.confirm-btn,
 .cancel-btn,
+.complete-btn,
 .dashboard-btn,
 .status-badge{
 
@@ -1299,7 +1372,9 @@
 }
 
 .details-btn,
-.cancel-btn{
+.confirm-btn,
+.cancel-btn,
+.complete-btn{
 
     flex:1;
 
@@ -1381,7 +1456,9 @@
 }
 
 .details-btn,
-.cancel-btn{
+.confirm-btn,
+.cancel-btn,
+.complete-btn{
 
     width:100%;
 
@@ -1460,7 +1537,9 @@ input:focus{
 }
 
 .details-btn:focus-visible,
+.confirm-btn:focus-visible,
 .cancel-btn:focus-visible,
+.complete-btn:focus-visible,
 .dashboard-btn:focus-visible{
 
     box-shadow:0 0 0 4px rgba(120,204,40,.18);

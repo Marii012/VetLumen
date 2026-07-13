@@ -1,0 +1,754 @@
+.pets-container{
+    margin-left: 270px;
+    padding: 40px;
+    background: #f1f5f9;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* HEADER */
+
+.pets-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    margin-bottom:35px;
+}
+
+.pets-header h1{
+    font-size:1.8rem;
+    font-weight:700;
+    margin:0 0 6px;
+    color:#0f172a;
+}
+
+.pets-header p{
+    margin:0;
+    color:#64748b;
+    font-size:0.95rem;
+}
+
+/* BOTÃO */
+
+.add-pet-btn{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:14px 22px;
+
+    border:none;
+    border-radius:14px;
+
+    background:#78cc28;
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+    transition:.25s;
+}
+
+.add-pet-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 24px rgba(120,204,40,.3);
+}
+
+/* GRID */
+
+.pets-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fill,minmax(380px,1fr));
+
+    gap:24px;
+
+}
+
+/* CARD */
+
+.pet-card{
+    display:flex;
+    align-items:flex-start;
+    gap:20px;
+
+    background:white;
+
+    padding:24px;
+
+    border-radius:22px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.05);
+
+    transition:.25s;
+
+    min-height:220px;
+}
+
+.pet-card:hover{
+    transform:translateY(-4px);
+}
+
+/* FOTO */
+
+.pet-image{
+    width:90px;
+    height:90px;
+
+    border-radius:20px;
+
+    object-fit:cover;
+}
+
+/* INFO */
+
+.pet-info{
+    flex:1;
+    min-width:0;
+}
+
+.pet-info h3{
+    margin-bottom:6px;
+    font-size:1.2rem;
+}
+
+.pet-info p{
+    margin:0;
+    color:#475569;
+    font-weight:500;
+}
+
+.pet-info span{
+    display:block;
+    margin-top:4px;
+    color:#94a3b8;
+}
+
+.pet-info small{
+    display:block;
+    margin-top:8px;
+    color:#78cc28;
+    font-weight:600;
+}
+
+.pet-owner{
+    display:flex !important;
+    align-items:center;
+    gap:8px;
+    margin-top:10px !important;
+    color:#334155 !important;
+    font-weight:600 !important;
+}
+
+.pet-owner i{
+    color:#78cc28;
+}
+
+/* AÇÕES */
+
+.pet-actions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    flex-shrink:0;
+
+}
+
+.pet-actions button{
+    width:42px;
+    height:42px;
+
+    border:none;
+    border-radius:12px;
+
+    background:#f8fafc;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.pet-actions button i{
+    color:#64748b;
+    font-size:1.1rem;
+}
+
+.edit-btn:hover{
+    background:#eaf8de;
+    color:#78cc28;
+}
+
+.delete-btn:hover{
+    background:#ffecec;
+    color:#dc3545;
+}
+
+/* ==================================================
+   FILTROS
+================================================== */
+
+.pets-filters{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+
+    margin-bottom:30px;
+}
+
+/* Pesquisa */
+
+.search-box{
+    flex:1;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:0 18px;
+
+    height:52px;
+
+    background:#ffffff;
+
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+
+    transition:.25s;
+}
+
+.search-box:focus-within{
+    border-color:#78cc28;
+    box-shadow:0 0 0 4px rgba(120,204,40,.12);
+}
+
+.search-box i{
+    font-size:1rem;
+    color:#94a3b8;
+}
+
+.search-box input{
+    flex:1;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    font-size:.95rem;
+    color:#1e293b;
+}
+
+.search-box input::placeholder{
+    color:#94a3b8;
+}
+
+/* ==================================================
+   REACT SELECT - PETS
+================================================== */
+
+.pets-select__control{
+    min-height:52px !important;
+    min-width:200px !important;
+
+    border:1px solid #e2e8f0 !important;
+    border-radius:14px !important;
+
+    box-shadow:none !important;
+
+    transition:.25s;
+}
+
+.pets-select__control:hover{
+    border-color:#78cc28 !important;
+}
+
+.pets-select__control--is-focused{
+    border-color:#78cc28 !important;
+    box-shadow:0 0 0 4px rgba(120,204,40,.12) !important;
+}
+
+.pets-select__value-container{
+    padding:2px 14px !important;
+}
+
+.pets-select__indicator-separator{
+    display:none;
+}
+
+.pets-select__dropdown-indicator{
+    color:#94a3b8 !important;
+}
+
+.pets-select__dropdown-indicator:hover{
+    color:#78cc28 !important;
+}
+
+.pets-select__menu{
+    margin-top:8px !important;
+
+    border:none !important;
+
+    border-radius:16px !important;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 12px 40px rgba(0,0,0,.12),
+        0 4px 12px rgba(0,0,0,.05) !important;
+}
+
+.pets-select__menu-list{
+    padding:6px !important;
+}
+
+.pets-select__option{
+    border-radius:12px;
+    padding:12px 16px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.pets-select__option--is-focused{
+    background:#f5fbfa !important;
+    color:#78cc28 !important;
+}
+
+.pets-select__option--is-selected{
+    background:#78cc28 !important;
+    color:white !important;
+}
+
+.pets-select__placeholder{
+    color:#94a3b8;
+}
+
+.pets-select__single-value{
+    color:#1e293b;
+    font-weight:500;
+}
+
+/* EXTRA INFO DO ANIMAL */
+
+.pet-extra{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+
+    margin-top:18px;
+
+    width:100%;
+
+}
+
+
+.pet-extra div{
+
+    background:#f8fafc;
+
+    padding:12px 14px;
+
+    border-radius:14px;
+
+}
+
+
+.pet-extra i{
+
+    color:#78cc28;
+
+    font-size:1rem;
+
+    margin-bottom:6px;
+
+    display:block;
+
+}
+
+
+.pet-extra strong{
+
+    font-size:.85rem;
+
+    color:#1e293b;
+
+    display:block;
+
+}
+
+
+.pet-extra p{
+
+    margin-top:5px;
+
+    margin-bottom:0;
+
+    font-size:.8rem;
+
+    color:#64748b;
+
+}
+
+
+
+
+
+/* NOVOS BOTÕES */
+
+
+.details-btn:hover{
+
+background:#e0f2fe;
+
+color:#05080a;
+
+}
+
+
+
+.history-btn:hover{
+
+background:#ede9fe;
+
+color:#7c3aed;
+
+}
+
+
+
+.vaccine-btn:hover{
+
+background:#ecfccb;
+
+color:#65a30d;
+
+}
+
+.add-record-btn:hover{
+
+background:#dbeafe;
+
+color:#2563eb;
+
+}
+
+
+
+
+
+/* ajustar card para crescer */
+
+
+.pet-card{
+
+align-items:flex-start;
+
+}
+
+
+
+.pet-info{
+
+padding-top:5px;
+
+}
+
+
+
+
+/* ações agora têm mais botões */
+
+
+.pet-actions button{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+/* ================= FORMULÁRIO DE ADICIONAR ANIMAL ================= */
+
+.add-pet-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 18px 22px;
+    align-items: start;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.add-pet-form .full-width {
+    grid-column: 1 / -1;
+}
+
+.add-pet-form .profile-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+}
+
+.add-pet-form .profile-item label {
+    display: block;
+    color: #334155;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.add-pet-form .profile-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #0f172a;
+    background: white;
+    min-height: 46px;
+    line-height: 1.4;
+}
+
+.add-pet-form .profile-input:focus {
+    outline: none;
+    border-color: #78cc28;
+    box-shadow: 0 0 0 3px rgba(120, 204, 40, 0.14);
+}
+
+.add-pet-form .add-pet-inline-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    grid-column: 1 / -1;
+}
+
+.add-pet-form .add-pet-birth-field {
+    grid-column: 1;
+}
+
+.add-pet-form .add-pet-weight-field {
+    grid-column: 2;
+}
+
+.add-pet-form .profile-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.add-pet-form .pet-form-select__control {
+    min-height: 48px !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+}
+
+.add-pet-form .pet-form-select__control:hover {
+    border-color: #78cc28 !important;
+}
+
+.add-pet-form .pet-form-select__control--is-focused {
+    border-color: #78cc28 !important;
+    box-shadow: 0 0 0 3px rgba(120, 204, 40, 0.14) !important;
+}
+
+.add-pet-form .pet-form-select__placeholder,
+.add-pet-form .pet-form-select__single-value {
+    color: #334155 !important;
+    font-size: 0.95rem !important;
+}
+
+.add-pet-form .pet-form-select__menu {
+    border-radius: 14px !important;
+}
+
+.add-pet-form .pet-form-select__option--is-selected {
+    background: #78cc28 !important;
+}
+
+.add-pet-form .profile-error {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: #dc2626;
+    font-weight: 600;
+}
+
+@media (max-width: 992px) {
+    .appointments-container {
+        margin-left: 0;
+        padding: 30px;
+    }
+
+    .add-pet-form {
+        grid-template-columns: 1fr;
+    }
+
+    .add-pet-form .add-pet-inline-row {
+        grid-template-columns: 1fr;
+    }
+
+    .add-pet-form .profile-edit-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+}
+
+/* ================= SWEETALERT PET FORM ================= */
+
+.vetlumen-swal-popup {
+    border-radius: 22px !important;
+    padding: 1.2rem !important;
+}
+
+.pet-swal-select__control {
+    min-height: 52px !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 18px !important;
+    box-shadow: none !important;
+    transition: .2s;
+}
+
+.pet-swal-select__control:hover {
+    border-color: #78cc28 !important;
+}
+
+.pet-swal-select__control--is-focused {
+    border-color: #78cc28 !important;
+    box-shadow: 0 0 0 .2rem rgba(120, 204, 40, .15) !important;
+}
+
+.pet-swal-select__indicator-separator {
+    display: none;
+}
+
+.pet-swal-select__menu {
+    border-radius: 18px !important;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.pet-swal-select__menu-list {
+    max-height: 190px;
+    padding: 0 !important;
+}
+
+.pet-swal-select__option {
+    padding: 12px 18px;
+    cursor: pointer;
+}
+
+.pet-swal-select__option--is-focused {
+    background: #f5f5f5 !important;
+    color: #333 !important;
+}
+
+.pet-swal-select__option--is-selected {
+    background: #78cc28 !important;
+    color: #fff !important;
+}
+
+.pet-swal-select__placeholder {
+    color: #6c757d;
+}
+
+.pet-swal-select__single-value {
+    color: #212529;
+}
+
+.vetlumen-swal-title {
+    color: #1e293b !important;
+    font-weight: 700 !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.vetlumen-swal-text {
+    color: #475569 !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.vetlumen-swal-button {
+    background: #78cc28 !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 10px 18px !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+}
+
+.vetlumen-swal-button:hover {
+    background: #65a30d !important;
+}
+
+.pet-swal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+}
+
+.pet-swal-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.95rem;
+    color: #334155;
+    font-weight: 600;
+}
+
+.pet-swal-form span {
+    font-size: 0.9rem;
+}
+
+.pet-swal-input {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    color: #0f172a;
+    background: #fff;
+}
+
+.pet-swal-input:focus {
+    outline: none;
+    border-color: #78cc28;
+    box-shadow: 0 0 0 3px rgba(120, 204, 40, 0.14);
+}
+
+.pet-swal-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+
+
+
+
+/* badge opcional */
+
+
+.pet-vaccine-count{
+
+color:#78cc28;
+
+font-weight:600;
+
+}

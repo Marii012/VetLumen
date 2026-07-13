@@ -1,0 +1,632 @@
+/* ==========================================================================
+   VetLumen Dashboard - Estilos Otimizados
+   ========================================================================== */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* Mesma cor de fundo do teu dashboard-container */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container Principal */
+.dashboard-container {
+  margin-left: 270px;
+  min-height: 100vh;
+  background: #f1f5f9; /* Fundo ligeiramente mais neutro */
+  padding: 40px;
+  font-family: 'Poppins', sans-serif;
+  color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+  border-top-left-radius: 24px;
+}
+
+/* Cabeçalho */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.dashboard-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.dashboard-header p {
+  color: #64748b;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.date-box {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  color: #475569;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* Banner de Boas-Vindas */
+.welcome-card {
+  height: 240px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding: 36px 44px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(15, 23, 42, 0.2)), 
+              url("https://images.unsplash.com/photo-1463522689871-cb92fc985793?q=80&w=1191&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.welcome-card h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.welcome-card p {
+  color: #f1f5f9;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.dashboard-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #78cc28; /* Verde como ação principal */
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-btn:hover {
+  background: #5db11d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(120, 204, 40, 0.3);
+}
+
+/* Estatísticas (Melhoria Visual nos Cards) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.stat-card {
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center; /* Alinha o ícone e o texto horizontalmente */
+  gap: 20px;           /* Espaçamento perfeito entre o ícone e o conteúdo */
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05); /* Sombra inicial mais subtil e moderna */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: #cbd5e1;
+  box-shadow: 0 12px 20px -8px rgba(15, 23, 42, 0.08); /* Sombra mais suave e integrada com a cor do texto */
+}
+
+.stat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #f8fafc; /* Tom neutro ainda mais limpo */
+  color: #64748b;     /* Cinza sofisticado */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  border: 1px solid #f1f5f9; /* Micro borda para dar definição ao ícone */
+  transition: all 0.3s ease;
+  flex-shrink: 0;     /* Garante que o ícone não deforma em ecrãs pequenos */
+}
+
+/* Micro-interação: O ícone ganha um destaque sutil e a cor da marca no hover do card */
+.stat-card:hover .stat-icon {
+  background: #e8f5e0; /* O teu verde claro muito suave, apenas no hover do ícone */
+  color: #78cc28;      /* Verde VetLumen focado no ícone */
+  border-color: #d2f0b5;
+  transform: scale(1.05);
+}
+
+/* Contentor do texto para alinhar perfeitamente */
+.stat-card > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-card h3 {
+  font-size: 2.2rem;   /* Ligeiramente maior para dar impacto ao número */
+  font-weight: 700;
+  color: #0f172a; 
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.stat-card p {
+  font-size: 0.85rem;  /* Reduzido um pouco para criar maior hierarquia visual com o H3 */
+  font-weight: 500;
+  color: #64748b;
+  text-transform: uppercase; /* Opcional: dá um visual de "label" de dashboard mais profissional */
+  letter-spacing: 0.05em;
+}
+
+/* Grelha Secundária */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.dashboard-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.dashboard-card:hover {
+  border-color: #cbd5e1;
+}
+
+.card-title h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0;
+}
+
+/* Ajuste para alinhar controles ao título do cartão */
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-title .chart-controls-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title .chart-controls-inline label {
+  font-size: 0.95rem;
+  color: #475569;
+  font-weight: 600;
+}
+
+.card-title .chart-controls-inline select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(2,6,23,0.04);
+  transition: all 0.18s ease;
+}
+
+.card-title .chart-controls-inline select:focus {
+  outline: none;
+  border-color: #78cc28;
+  box-shadow: 0 6px 18px rgba(120,204,40,0.12);
+}
+
+/* Gráfico de Barras */
+.chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  height: 150px;
+}
+
+/* Controles do gráfico (filtro de ano) */
+.chart-controls {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.chart-controls label {
+  font-size: 0.9rem;
+  color: #475569;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.chart-controls select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(2,6,23,0.04);
+  transition: all 0.18s ease;
+  appearance: none; /* remove default arrow in some browsers */
+}
+
+.chart-controls select:focus {
+  outline: none;
+  border-color: #78cc28;
+  box-shadow: 0 6px 18px rgba(120,204,40,0.12);
+}
+
+.bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  gap: 8px;
+}
+
+.bar span {
+  width: 100%;
+  max-width: 28px;
+  border-radius: 6px 6px 0 0;
+  background: #94a3b8; /* Barras neutras por padrão */
+  transition: all 0.2s ease;
+}
+
+.bar:hover span {
+  background: #78cc28; /* Ganha a cor da marca no foco */
+  transform: scaleY(1.02);
+}
+
+.bar small {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Módulos de Listas (Consultas, Animais e Atividades)
+   ========================================================================== */
+
+/* Cartão de Próxima Consulta */
+.appointment-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px;
+  background: #ffffff; /* Fundo branco por padrão para consistência com o resto do dashboard */
+  border-radius: 16px; /* Ajustado para os mesmos 16px dos stat-cards */
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.appointment-card:hover {
+  transform: translateY(-2px); /* Pequeno feedback de elevação ao passar o rato */
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.06);
+}
+
+.appointment-icon {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #f8fafc; /* Fundo neutro suave inicial */
+  color: #475569;      /* Ícone discreto por padrão */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s ease;
+}
+
+/* O ícone ganha vida quando passas o rato no cartão */
+.appointment-card:hover .appointment-icon {
+  background: #e8f5e0;
+  color: #78cc28;
+  border-color: #d2f0b5;
+}
+
+/* Contentor do Texto */
+.appointment-card > div:last-child {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.appointment-card h4 {
+  font-size: 1.05rem; /* Nome do animal ligeiramente maior */
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.appointment-card p {
+  font-size: 0.88rem;
+  color: #64748b; /* Cinza ligeiramente mais suave para o tipo de consulta */
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* Transformação do Span num Badge de Data de Alto Contraste */
+.appointment-card span {
+  align-self: flex-start; /* Impede que o badge ocupe a largura toda */
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  background: #f1f5f9; /* Fundo cinza claro texturizado */
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+/* No hover, o badge da data ganha um sotaque sutil da marca */
+.appointment-card:hover span {
+  background: #e8f5e0;
+  color: #5db11d;
+  border-color: #e2e8f0;
+}
+/* Linha de Animais */
+.pet-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #ffffff;
+  border-radius: 16px; /* Alinhado com os restantes 16px dos cards */
+  margin-bottom: 12px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pet-row:last-child {
+  margin-bottom: 0; /* Evita margem extra no final do container */
+}
+
+.pet-row:hover {
+  background: #ffffff;
+  border-color: #78cc28; /* Ganha a borda da marca sutilmente no hover */
+  box-shadow: 0 6px 16px -4px rgba(15, 23, 42, 0.04);
+  transform: translateX(6px); /* Feedback de movimento suave para a direita */
+}
+
+/* Avatar Otimizado (Pronto para imagens ou ícone genérico) */
+.pet-avatar {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+/* Se usares uma tag <img> dentro do avatar no futuro, isto garante que fica perfeita */
+.pet-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pet-row:hover .pet-avatar {
+  border-color: #cbd5e1;
+  background-color: #e2e8f0;
+}
+
+/* Informações do Animal */
+.pet-row > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pet-row strong {
+  font-size: 1rem; /* Nome ligeiramente mais destacado */
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.pet-row p {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Badge de Status Refinado */
+.pet-row .status {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1e293b;
+  background: #f1f5f9; /* Tom cinza neutro muito mais leve e moderno */
+  padding: 6px 14px;
+  border-radius: 99px; /* Formato "pílula" oval para diferenciar de outros botões */
+  border: 1px solid #e2e8f0;
+  margin-left: auto;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+}
+
+/* Opcional/Sugestão: Se quiseres que o "Saudável" acenda em verde no hover do card */
+.pet-row:hover .status {
+  background: #e8f5e0;
+  color: #5db11d;
+  border-color: #d2f0b5;
+}
+
+/* Contentor pai das atividades (caso queiras adicionar esta regra à secção ou div que envolve as atividades) */
+.dashboard-card {
+  position: relative; /* Garante que a linha vertical se posiciona bem */
+}
+
+/* Atividade Recente (Estilo Timeline) */
+.activity {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+  position: relative;
+}
+
+/* Cria a linha vertical que liga as atividades */
+.activity:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 18px; /* Alinhamento milimétrico com o centro do ícone */
+  top: 44px;  /* Começa logo abaixo do círculo do ícone */
+  width: 2px;
+  height: calc(100% - 20px);
+  background-color: #f1f5f9; /* Linha vertical sutil */
+}
+
+.activity i {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%; /* Transforma o ícone num círculo */
+  background: #f8fafc; /* Fundo neutro e limpo */
+  color: #64748b;      /* Cor do ícone */
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;  /* Ícone ligeiramente mais compacto dentro do círculo */
+  flex-shrink: 0;
+  z-index: 1;          /* Fica por cima da linha vertical */
+  transition: all 0.25s ease;
+}
+
+/* Micro-interação: Destacar sutilmente a atividade ao passar o rato no bloco */
+.activity:hover i {
+  background: #e8f5e0; /* O teu verde muito suave */
+  color: #78cc28;      /* Verde VetLumen */
+  border-color: #d2f0b5;
+  transform: scale(1.08);
+}
+
+/* Contentor do Texto */
+.activity > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 2px; /* Alinha o texto perfeitamente com a altura do ícone */
+}
+
+.activity strong {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.activity p {
+  font-size: 0.85rem;
+  color: #64748b; /* Mudado para um cinza ligeiramente mais suave para maior hierarquia */
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+    border-top-left-radius: 0;
+    margin-left: 0;
+  }
+
+  .dashboard-container::before {
+    display: none;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+    height: auto;
+    gap: 20px;
+  }
+
+  .date-box {
+    width: 100%;
+    justify-content: center;
+  }
+}
