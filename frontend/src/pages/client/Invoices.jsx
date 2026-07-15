@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import api from "../../services/api";
@@ -18,7 +18,38 @@ const swalCustomClass = {
   confirmButton: "vetlumen-swal-button"
 };
 
-const normalizeInvoice = (invoice) => {
+const formatDate = (value) => {
+  if (!value) return "Não disponível";
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return date.toLocaleDateString("pt-PT");
+};
+
+const formatTime = (value) => {
+  if (!value) return "Não disponível";
+  if (typeof value === "string") {
+    return value.includes(":") ? value.slice(0, 5) : value;
+  }
+  return value;
+};
+
+const isCompletedAppointment = (status) => {
+  const normalized = String(status || "").trim().toLowerCase();
+  return normalized === "concluída" || normalized === "concluida" || normalized === "completed";
+};
+
+const formatEuro = (value) => {
+  if (value == null || value === "") return "0.00€";
+  const num = Number(value);
+  if (Number.isNaN(num)) return "0.00€";
+  return `${num.toFixed(2)}€`;
+};
+
+const normalizeInvoice = (invoice, appointment, pet, service) => {
   const rawStatus = String(invoice.estado_pagamento || "").trim().toLowerCase();
   let uiStatus = "Pendente";
 
@@ -28,9 +59,7 @@ const normalizeInvoice = (invoice) => {
     uiStatus = "Cancelado";
   }
 
-  const total = invoice.total_liquido != null
-    ? `${Number(invoice.total_liquido).toFixed(2)}€`
-    : "0.00€";
+  const total = formatEuro(invoice.total_liquido);
 
   const items = [];
   if (invoice.total_bruto != null) {
@@ -43,12 +72,17 @@ const normalizeInvoice = (invoice) => {
   return {
     id_invoice: invoice.id_invoice,
     number: invoice.num_fatura || `FAT-${invoice.id_invoice}`,
-    date: invoice.data_emissao
-      ? new Date(invoice.data_emissao).toLocaleDateString("pt-PT")
-      : "Não disponível",
+    date: formatDate(invoice.data_emissao),
     total,
     status: uiStatus,
-    items
+    items,
+    consultationName: service?.nome || appointment?.motivo || "Consulta",
+    petName: pet?.nome || "Animal não identificado",
+    appointmentDate: appointment ? formatDate(appointment.data) : "Não disponível",
+    appointmentTime: appointment ? formatTime(appointment.hora) : "Não disponível",
+    appointmentStatus: appointment?.estado
+      ? (isCompletedAppointment(appointment.estado) ? "Concluída" : appointment.estado)
+      : "Não disponível"
   };
 };
 
@@ -60,21 +94,83 @@ const Invoices = () => {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState(options[0]);
 
-  useEffect(() => {
-    loadInvoices();
-  }, []);
-
-  const loadInvoices = async (selectedStatus = status.value) => {
+  const loadInvoices = useCallback(async (selectedStatus = "all") => {
     try {
       setLoading(true);
 
-      const response = await api.get("/invoices", {
-        params: {
-          status: selectedStatus === "all" ? "all" : selectedStatus
+      let loggedUserId = null;
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        try {
+          const parsedUser = JSON.parse(storedUser);
+          loggedUserId = parsedUser?.id_user ? Number(parsedUser.id_user) : null;
+        } catch (parseError) {
+          console.warn("Não foi possível obter o utilizador autenticado para filtrar faturas.", parseError);
+        }
+      }
+
+      const [invoicesResponse, appointmentsResponse] = await Promise.all([
+        api.get("/invoices", {
+          params: {
+            status: selectedStatus === "all" ? "all" : selectedStatus
+          }
+        }),
+        api.get("/appointments")
+      ]);
+
+      const invoicesData = Array.isArray(invoicesResponse.data) ? invoicesResponse.data : [];
+      const invoicesByUser = loggedUserId
+        ? invoicesData.filter((invoice) => Number(invoice.id_user) === Number(loggedUserId))
+        : invoicesData;
+      const appointmentsData = Array.isArray(appointmentsResponse.data) ? appointmentsResponse.data : [];
+
+      const appointmentsMap = new Map(
+        appointmentsData.map((appointment) => [appointment.id_appointment, appointment])
+      );
+
+      const petIds = [
+        ...new Set(
+          invoicesByUser
+            .map((invoice) => appointmentsMap.get(invoice.id_appointment)?.id_pet)
+            .filter(Boolean)
+        )
+      ];
+
+      const serviceIds = [
+        ...new Set(
+          invoicesByUser
+            .map((invoice) => appointmentsMap.get(invoice.id_appointment)?.id_service)
+            .filter(Boolean)
+        )
+      ];
+
+      const [petsResults, servicesResults] = await Promise.all([
+        Promise.allSettled(petIds.map((id) => api.get(`/pets/${id}`))),
+        Promise.allSettled(serviceIds.map((id) => api.get(`/services/${id}`)))
+      ]);
+
+      const petsMap = new Map();
+      petsResults.forEach((result, index) => {
+        if (result.status === "fulfilled") {
+          petsMap.set(petIds[index], result.value.data);
         }
       });
-      const data = Array.isArray(response.data) ? response.data : [];
-      const normalizedInvoices = data.map(normalizeInvoice);
+
+      const servicesMap = new Map();
+      servicesResults.forEach((result, index) => {
+        if (result.status === "fulfilled") {
+          servicesMap.set(serviceIds[index], result.value.data);
+        }
+      });
+
+      const normalizedInvoices = invoicesByUser
+        .map((invoice) => {
+          const appointment = appointmentsMap.get(invoice.id_appointment);
+          const pet = appointment ? petsMap.get(appointment.id_pet) : null;
+          const service = appointment ? servicesMap.get(appointment.id_service) : null;
+          return normalizeInvoice(invoice, appointment, pet, service);
+        })
+        .filter(Boolean);
 
       setInvoices(normalizedInvoices);
       setError("");
@@ -86,10 +182,17 @@ const Invoices = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    // This page loads data once on mount; subsequent reloads happen on status selection.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadInvoices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const filteredInvoices = invoices.filter((invoice) => {
-    const searchText = `${invoice.number || ""} ${invoice.status || ""}`.toLowerCase();
+    const searchText = `${invoice.number || ""} ${invoice.status || ""} ${invoice.consultationName || ""} ${invoice.petName || ""}`.toLowerCase();
     return searchText.includes(search.toLowerCase());
   });
 
@@ -111,17 +214,28 @@ const Invoices = () => {
       title: invoice.number,
       html: `
         <div class="invoice-details-modal">
+          <p><strong>Consulta:</strong> ${invoice.consultationName}</p>
+          <p><strong>Animal:</strong> ${invoice.petName}</p>
+          <p><strong>Data da consulta:</strong> ${invoice.appointmentDate}</p>
+          <p><strong>Hora da consulta:</strong> ${invoice.appointmentTime}</p>
+          <p><strong>Estado da consulta:</strong> ${invoice.appointmentStatus}</p>
           <p><strong>Estado:</strong> ${invoice.status}</p>
-          <p><strong>Data:</strong> ${invoice.date}</p>
+          <p><strong>Data de emissão:</strong> ${invoice.date}</p>
           <p><strong>Total:</strong> ${invoice.total}</p>
           <div class="invoice-details-items">
-            ${(invoice.items || []).map((item) => `<span>${item}</span>`).join("")}
+            ${(invoice.items || []).map((item) => `<span>${item}</span>`).join(" ")}
           </div>
         </div>
       `,
       icon: "info",
       confirmButtonText: "Fechar",
-      customClass: swalCustomClass
+      customClass: swalCustomClass,
+      returnFocus: false,
+      didClose: () => {
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+      }
     });
   };
 
@@ -148,8 +262,9 @@ const Invoices = () => {
             options={options}
             value={status}
             onChange={(option) => {
-              setStatus(option);
-              loadInvoices(option?.value || "all");
+              const selectedOption = option || options[0];
+              setStatus(selectedOption);
+              loadInvoices(selectedOption.value);
             }}
             className="invoice-select"
             classNamePrefix="invoice-select"
@@ -170,6 +285,21 @@ const Invoices = () => {
 
             <div className="invoice-info">
               <h3>{invoice.number}</h3>
+
+              <p>
+                <i className="bi bi-clipboard2-pulse me-3 fs-5"></i>
+                {invoice.consultationName}
+              </p>
+
+              <p>
+                <i className="bi bi-heart me-3 fs-5"></i>
+                {invoice.petName}
+              </p>
+
+              <p>
+                <i className="bi bi-calendar-check me-3 fs-5"></i>
+                {invoice.appointmentDate} • {invoice.appointmentTime}
+              </p>
 
               <p>
                 <i className="bi bi-calendar me-3 fs-5"></i>

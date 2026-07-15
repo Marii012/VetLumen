@@ -16,7 +16,7 @@ html, body {
 }
 
 /* Container Principal */
-.dashboard-container {
+.vet-dashboard .dashboard-container {
   margin-left: 270px;
   min-height: 100vh;
   background: #f1f5f9; /* Fundo ligeiramente mais neutro */
@@ -31,27 +31,27 @@ html, body {
 }
 
 /* Cabeçalho */
-.dashboard-header {
+.vet-dashboard .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
 }
 
-.dashboard-header h1 {
+.vet-dashboard .dashboard-header h1 {
   font-size: 1.8rem;
   font-weight: 700;
   color: #0f172a;
   margin-bottom: 6px;
 }
 
-.dashboard-header p {
+.vet-dashboard .dashboard-header p {
   color: #64748b;
   font-size: 0.95rem;
   font-weight: 500;
 }
 
-.date-box {
+.vet-dashboard .date-box {
   display: inline-flex;
   align-items: center;
   padding: 10px 16px;
@@ -65,7 +65,7 @@ html, body {
 }
 
 /* Banner de Boas-Vindas */
-.welcome-card {
+.vet-dashboard .welcome-card {
   height: 240px;
   position: relative;
   display: flex;
@@ -84,27 +84,27 @@ html, body {
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
 }
 
-.welcome-content {
+.vet-dashboard .welcome-content {
   position: relative;
   z-index: 1;
   flex: 1;
 }
 
-.welcome-card h2 {
+.vet-dashboard .welcome-card h2 {
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 12px;
   letter-spacing: -0.01em;
 }
 
-.welcome-card p {
+.vet-dashboard .welcome-card p {
   color: #f1f5f9;
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 20px;
 }
 
-.dashboard-btn {
+.vet-dashboard .dashboard-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -119,20 +119,20 @@ html, body {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.dashboard-btn:hover {
+.vet-dashboard .dashboard-btn:hover {
   background: #5db11d;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(120, 204, 40, 0.3);
 }
 
 /* Estatísticas (Melhoria Visual nos Cards) */
-.stats-grid {
+.vet-dashboard .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
-.stat-card {
+.vet-dashboard .stat-card {
   border-radius: 16px;
   padding: 24px;
   display: flex;
@@ -146,13 +146,13 @@ html, body {
   overflow: hidden;
 }
 
-.stat-card:hover {
+.vet-dashboard .stat-card:hover {
   transform: translateY(-5px);
   border-color: #cbd5e1;
   box-shadow: 0 12px 20px -8px rgba(15, 23, 42, 0.08); /* Sombra mais suave e integrada com a cor do texto */
 }
 
-.stat-icon {
+.vet-dashboard .stat-icon {
   width: 52px;
   height: 52px;
   border-radius: 12px;
@@ -168,7 +168,7 @@ html, body {
 }
 
 /* Micro-interação: O ícone ganha um destaque sutil e a cor da marca no hover do card */
-.stat-card:hover .stat-icon {
+.vet-dashboard .stat-card:hover .stat-icon {
   background: #e8f5e0; /* O teu verde claro muito suave, apenas no hover do ícone */
   color: #78cc28;      /* Verde VetLumen focado no ícone */
   border-color: #d2f0b5;
@@ -176,13 +176,13 @@ html, body {
 }
 
 /* Contentor do texto para alinhar perfeitamente */
-.stat-card > div:last-child {
+.vet-dashboard .stat-card > div:last-child {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.stat-card h3 {
+.vet-dashboard .stat-card h3 {
   font-size: 2.2rem;   /* Ligeiramente maior para dar impacto ao número */
   font-weight: 700;
   color: #0f172a; 
@@ -190,7 +190,7 @@ html, body {
   letter-spacing: -0.03em;
 }
 
-.stat-card p {
+.vet-dashboard .stat-card p {
   font-size: 0.85rem;  /* Reduzido um pouco para criar maior hierarquia visual com o H3 */
   font-weight: 500;
   color: #64748b;
@@ -199,13 +199,13 @@ html, body {
 }
 
 /* Grelha Secundária */
-.dashboard-grid {
+.vet-dashboard .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 25px;
 }
 
-.dashboard-card {
+.vet-dashboard .dashboard-card {
   background: #ffffff;
   border-radius: 16px;
   padding: 25px;
@@ -214,11 +214,11 @@ html, body {
   transition: all 0.25s ease;
 }
 
-.dashboard-card:hover {
+.vet-dashboard .dashboard-card:hover {
   border-color: #cbd5e1;
 }
 
-.card-title h3 {
+.vet-dashboard .card-title h3 {
   font-size: 1.1rem;
   font-weight: 600;
   color: #0f172a;
@@ -226,26 +226,26 @@ html, body {
 }
 
 /* Ajuste para alinhar controles ao título do cartão */
-.card-title {
+.vet-dashboard .card-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
 }
 
-.card-title .chart-controls-inline {
+.vet-dashboard .card-title .chart-controls-inline {
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-.card-title .chart-controls-inline label {
+.vet-dashboard .card-title .chart-controls-inline label {
   font-size: 0.95rem;
   color: #475569;
   font-weight: 600;
 }
 
-.card-title .chart-controls-inline select {
+.vet-dashboard .card-title .chart-controls-inline select {
   padding: 8px 10px;
   border-radius: 10px;
   border: 1px solid #e2e8f0;
@@ -256,14 +256,14 @@ html, body {
   transition: all 0.18s ease;
 }
 
-.card-title .chart-controls-inline select:focus {
+.vet-dashboard .card-title .chart-controls-inline select:focus {
   outline: none;
   border-color: #78cc28;
   box-shadow: 0 6px 18px rgba(120,204,40,0.12);
 }
 
 /* Gráfico de Barras */
-.chart {
+.vet-dashboard .chart {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -272,19 +272,19 @@ html, body {
 }
 
 /* Controles do gráfico (filtro de ano) */
-.chart-controls {
+.vet-dashboard .chart-controls {
   width: 100%;
   margin-bottom: 8px;
 }
 
-.chart-controls label {
+.vet-dashboard .chart-controls label {
   font-size: 0.9rem;
   color: #475569;
   font-weight: 600;
   margin-right: 6px;
 }
 
-.chart-controls select {
+.vet-dashboard .chart-controls select {
   padding: 8px 10px;
   border-radius: 10px;
   border: 1px solid #e2e8f0;
@@ -296,13 +296,13 @@ html, body {
   appearance: none; /* remove default arrow in some browsers */
 }
 
-.chart-controls select:focus {
+.vet-dashboard .chart-controls select:focus {
   outline: none;
   border-color: #78cc28;
   box-shadow: 0 6px 18px rgba(120,204,40,0.12);
 }
 
-.bar {
+.vet-dashboard .bar {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -312,7 +312,7 @@ html, body {
   gap: 8px;
 }
 
-.bar span {
+.vet-dashboard .bar span {
   width: 100%;
   max-width: 28px;
   border-radius: 6px 6px 0 0;
@@ -320,12 +320,12 @@ html, body {
   transition: all 0.2s ease;
 }
 
-.bar:hover span {
+.vet-dashboard .bar:hover span {
   background: #78cc28; /* Ganha a cor da marca no foco */
   transform: scaleY(1.02);
 }
 
-.bar small {
+.vet-dashboard .bar small {
   font-size: 0.8rem;
   color: #64748b;
   font-weight: 500;
@@ -336,7 +336,7 @@ html, body {
    ========================================================================== */
 
 /* Cartão de Próxima Consulta */
-.appointment-card {
+.vet-dashboard .appointment-card {
   display: flex;
   align-items: center;
   gap: 18px;
@@ -348,13 +348,13 @@ html, body {
   position: relative;
 }
 
-.appointment-card:hover {
+.vet-dashboard .appointment-card:hover {
   transform: translateY(-2px); /* Pequeno feedback de elevação ao passar o rato */
   border-color: #cbd5e1;
   box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.06);
 }
 
-.appointment-icon {
+.vet-dashboard .appointment-icon {
   width: 50px;
   height: 50px;
   flex-shrink: 0;
@@ -370,27 +370,27 @@ html, body {
 }
 
 /* O ícone ganha vida quando passas o rato no cartão */
-.appointment-card:hover .appointment-icon {
+.vet-dashboard .appointment-card:hover .appointment-icon {
   background: #e8f5e0;
   color: #78cc28;
   border-color: #d2f0b5;
 }
 
 /* Contentor do Texto */
-.appointment-card > div:last-child {
+.vet-dashboard .appointment-card > div:last-child {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.appointment-card h4 {
+.vet-dashboard .appointment-card h4 {
   font-size: 1.05rem; /* Nome do animal ligeiramente maior */
   font-weight: 700;
   color: #0f172a;
   margin-bottom: 2px;
 }
 
-.appointment-card p {
+.vet-dashboard .appointment-card p {
   font-size: 0.88rem;
   color: #64748b; /* Cinza ligeiramente mais suave para o tipo de consulta */
   margin-bottom: 10px;
@@ -398,7 +398,7 @@ html, body {
 }
 
 /* Transformação do Span num Badge de Data de Alto Contraste */
-.appointment-card span {
+.vet-dashboard .appointment-card span {
   align-self: flex-start; /* Impede que o badge ocupe a largura toda */
   font-size: 0.8rem;
   font-weight: 600;
@@ -414,13 +414,13 @@ html, body {
 }
 
 /* No hover, o badge da data ganha um sotaque sutil da marca */
-.appointment-card:hover span {
+.vet-dashboard .appointment-card:hover span {
   background: #e8f5e0;
   color: #5db11d;
   border-color: #e2e8f0;
 }
 /* Linha de Animais */
-.pet-row {
+.vet-dashboard .pet-row {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -432,11 +432,11 @@ html, body {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.pet-row:last-child {
+.vet-dashboard .pet-row:last-child {
   margin-bottom: 0; /* Evita margem extra no final do container */
 }
 
-.pet-row:hover {
+.vet-dashboard .pet-row:hover {
   background: #ffffff;
   border-color: #78cc28; /* Ganha a borda da marca sutilmente no hover */
   box-shadow: 0 6px 16px -4px rgba(15, 23, 42, 0.04);
@@ -444,7 +444,7 @@ html, body {
 }
 
 /* Avatar Otimizado (Pronto para imagens ou ícone genérico) */
-.pet-avatar {
+.vet-dashboard .pet-avatar {
   width: 46px;
   height: 46px;
   flex-shrink: 0;
@@ -459,31 +459,31 @@ html, body {
 }
 
 /* Se usares uma tag <img> dentro do avatar no futuro, isto garante que fica perfeita */
-.pet-avatar img {
+.vet-dashboard .pet-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.pet-row:hover .pet-avatar {
+.vet-dashboard .pet-row:hover .pet-avatar {
   border-color: #cbd5e1;
   background-color: #e2e8f0;
 }
 
 /* Informações do Animal */
-.pet-row > div:nth-child(2) {
+.vet-dashboard .pet-row > div:nth-child(2) {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.pet-row strong {
+.vet-dashboard .pet-row strong {
   font-size: 1rem; /* Nome ligeiramente mais destacado */
   font-weight: 700;
   color: #0f172a;
 }
 
-.pet-row p {
+.vet-dashboard .pet-row p {
   font-size: 0.85rem;
   color: #64748b;
   margin: 0;
@@ -491,7 +491,7 @@ html, body {
 }
 
 /* Badge de Status Refinado */
-.pet-row .status {
+.vet-dashboard .pet-row .status {
   font-size: 0.78rem;
   font-weight: 600;
   color: #1e293b;
@@ -505,19 +505,19 @@ html, body {
 }
 
 /* Opcional/Sugestão: Se quiseres que o "Saudável" acenda em verde no hover do card */
-.pet-row:hover .status {
+.vet-dashboard .pet-row:hover .status {
   background: #e8f5e0;
   color: #5db11d;
   border-color: #d2f0b5;
 }
 
 /* Contentor pai das atividades (caso queiras adicionar esta regra à secção ou div que envolve as atividades) */
-.dashboard-card {
+.vet-dashboard .dashboard-card {
   position: relative; /* Garante que a linha vertical se posiciona bem */
 }
 
 /* Atividade Recente (Estilo Timeline) */
-.activity {
+.vet-dashboard .activity {
   display: flex;
   align-items: flex-start;
   gap: 16px;
@@ -526,7 +526,7 @@ html, body {
 }
 
 /* Cria a linha vertical que liga as atividades */
-.activity:not(:last-child)::before {
+.vet-dashboard .activity:not(:last-child)::before {
   content: "";
   position: absolute;
   left: 18px; /* Alinhamento milimétrico com o centro do ícone */
@@ -536,7 +536,7 @@ html, body {
   background-color: #f1f5f9; /* Linha vertical sutil */
 }
 
-.activity i {
+.vet-dashboard .activity i {
   width: 36px;
   height: 36px;
   border-radius: 50%; /* Transforma o ícone num círculo */
@@ -553,7 +553,7 @@ html, body {
 }
 
 /* Micro-interação: Destacar sutilmente a atividade ao passar o rato no bloco */
-.activity:hover i {
+.vet-dashboard .activity:hover i {
   background: #e8f5e0; /* O teu verde muito suave */
   color: #78cc28;      /* Verde VetLumen */
   border-color: #d2f0b5;
@@ -561,63 +561,85 @@ html, body {
 }
 
 /* Contentor do Texto */
-.activity > div {
+.vet-dashboard .activity > div {
   display: flex;
   flex-direction: column;
   flex: 1;
   padding-top: 2px; /* Alinha o texto perfeitamente com a altura do ícone */
 }
 
-.activity strong {
+.vet-dashboard .activity strong {
   font-size: 0.95rem;
   font-weight: 600;
   color: #0f172a;
   line-height: 1.3;
 }
 
-.activity p {
+.vet-dashboard .activity p {
   font-size: 0.85rem;
   color: #64748b; /* Mudado para um cinza ligeiramente mais suave para maior hierarquia */
   margin-top: 4px;
   line-height: 1.5;
 }
 
+.vet-dashboard .dashboard-container .pending-view-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #334155;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.vet-dashboard .dashboard-container .pending-view-btn:hover,
+.vet-dashboard .dashboard-container .pending-view-btn:focus,
+.vet-dashboard .dashboard-container .pending-view-btn:focus-visible {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+  outline: none;
+}
+
 /* Responsividade */
 @media (max-width: 1200px) {
-  .dashboard-grid {
+  .vet-dashboard .dashboard-grid {
     grid-template-columns: 1fr;
   }
 
-  .stats-grid {
+  .vet-dashboard .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
-  .dashboard-container {
+  .vet-dashboard .dashboard-container {
     padding: 20px;
     border-top-left-radius: 0;
     margin-left: 0;
   }
 
-  .dashboard-container::before {
+  .vet-dashboard .dashboard-container::before {
     display: none;
   }
 
-  .dashboard-header {
+  .vet-dashboard .dashboard-header {
     flex-direction: column;
     gap: 15px;
   }
 
-  .dashboard-header h1 {
+  .vet-dashboard .dashboard-header h1 {
     font-size: 1.5rem;
   }
 
-  .stats-grid {
+  .vet-dashboard .stats-grid {
     grid-template-columns: 1fr;
   }
 
-  .welcome-card {
+  .vet-dashboard .welcome-card {
     flex-direction: column;
     text-align: center;
     padding: 30px 20px;
@@ -625,7 +647,7 @@ html, body {
     gap: 20px;
   }
 
-  .date-box {
+  .vet-dashboard .date-box {
     width: 100%;
     justify-content: center;
   }

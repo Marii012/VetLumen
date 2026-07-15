@@ -152,7 +152,13 @@ const Appointments = () => {
         </div>
       `,
       confirmButtonText: "Fechar",
-      customClass: swalCustomClass
+      customClass: swalCustomClass,
+      returnFocus: false,
+      didClose: () => {
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+      }
     });
   };
 

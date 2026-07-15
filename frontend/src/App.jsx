@@ -31,12 +31,24 @@ import VetProfile from "./pages/vet/VetProfile";
 import VetAddClinicalRecordPage from "./pages/vet/VetAddClinicalRecordPage";
 import VetFinalizeAppointmentPage from "./pages/vet/VetFinalizeAppointmentPage";
 
+{/* Dashboard Admin */}
+import AdminLayout from "./layouts/AdminLayout";
+import DashboardAdmin from "./pages/admin/DashboardAdmin";
+import AdminHistory from "./pages/admin/AdminHistory";
+import AdminProfile from "./pages/admin/AdminProfile";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminPets from "./pages/admin/AdminPets";
+import AdminAppointments from "./pages/admin/AdminMarkings";
+import AdminInvoices from "./pages/admin/AdminInvoices";
+import AdminServices from "./pages/admin/AdminServices";
+
 function App() {
   const location = useLocation();
 
   const hideLayout =
   location.pathname.startsWith("/client") ||
   location.pathname.startsWith("/vet") ||
+  location.pathname.startsWith("/admin") ||
   location.pathname === "/login" ||
   location.pathname === "/register";
 
@@ -76,6 +88,18 @@ function App() {
           <Route path="/vet/patients/:id/vaccines" element={<PetVaccines />} />
           <Route path="/vet/patients/:id/records/new" element={<VetAddClinicalRecordPage />} />
           <Route path="/vet/profile" element={<VetProfile />} />
+        </Route>
+
+        {/* Dashboard Admin */}
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/dashboard" element={<DashboardAdmin />} />
+          <Route path="/admin/history" element={<AdminHistory />} />
+          <Route path="/admin/profile" element={<AdminProfile />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/pets" element={<AdminPets />} />
+          <Route path="/admin/appointments" element={<AdminAppointments />} />
+          <Route path="/admin/services" element={<AdminServices />} />
+          <Route path="/admin/invoices" element={<AdminInvoices />} />
         </Route>
       </Routes>
 

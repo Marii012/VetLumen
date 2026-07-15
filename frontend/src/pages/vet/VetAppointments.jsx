@@ -14,6 +14,16 @@ const options = [
   { value: "Cancelada", label: "Canceladas" }
 ];
 
+const dateFilterOptions = [
+  { value: "all", label: "Todas as datas" },
+  { value: "today", label: "Hoje" },
+  { value: "next7", label: "Próximos 7 dias" },
+  { value: "upcoming", label: "Próximas" },
+  { value: "past", label: "Passadas" }
+];
+
+const rowsPerPageOptions = [5, 10, 20, 50];
+
 const swalCustomClass = {
   popup: "vetlumen-swal-popup",
   title: "vetlumen-swal-title",
@@ -32,6 +42,9 @@ const VetAppointments = () => {
   const [status, setStatus] = useState(options[0]);
   const [search, setSearch] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
+  const [dateFilter, setDateFilter] = useState(dateFilterOptions[0]);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:3000/api").replace(/\/api\/?$/i, "");
 
@@ -42,6 +55,32 @@ const VetAppointments = () => {
     return `${API_BASE}/uploads/${fotografia}`;
   };
 
+  const getDateKey = (value) => {
+    if (!value) return "";
+    return String(value).slice(0, 10);
+  };
+
+  const parseDateKey = (value) => {
+    const dateKey = getDateKey(value);
+
+    if (!dateKey) return null;
+
+    const [year, month, day] = dateKey.split("-").map(Number);
+
+    if (!year || !month || !day) return null;
+
+    return new Date(year, month - 1, day);
+  };
+
+  const getTodayKey = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
 
 
   useEffect(() => {
@@ -49,6 +88,12 @@ const VetAppointments = () => {
     loadAppointments();
 
   }, []);
+
+  useEffect(() => {
+
+    setCurrentPage(1);
+
+  }, [search, selectedDate, status, dateFilter, rowsPerPage]);
 
 
 
@@ -208,7 +253,13 @@ const VetAppointments = () => {
       `,
 
       confirmButtonText: "Fechar",
-      customClass: swalCustomClass
+      customClass: swalCustomClass,
+      returnFocus: false,
+      didClose: () => {
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+      }
 
     });
 
@@ -245,8 +296,44 @@ const VetAppointments = () => {
 
 
 
-    const appointmentDate = appointment.data ? String(appointment.data).slice(0, 10) : "";
-    const matchesDate = !selectedDate || appointmentDate === selectedDate;
+    const appointmentDate = getDateKey(appointment.data);
+    const appointmentDateObject = parseDateKey(appointmentDate);
+    const todayKey = getTodayKey();
+    const todayDate = parseDateKey(todayKey);
+    const nextWeekDate = todayDate ? new Date(todayDate) : null;
+
+    if (nextWeekDate) {
+      nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+    }
+
+    let matchesDate = true;
+
+    if (selectedDate) {
+      matchesDate = appointmentDate === selectedDate;
+    } else {
+      switch (dateFilter.value) {
+        case "today":
+          matchesDate = appointmentDate === todayKey;
+          break;
+        case "next7":
+          matchesDate = Boolean(
+            appointmentDateObject &&
+            todayDate &&
+            nextWeekDate &&
+            appointmentDateObject >= todayDate &&
+            appointmentDateObject <= nextWeekDate
+          );
+          break;
+        case "upcoming":
+          matchesDate = Boolean(appointmentDateObject && todayDate && appointmentDateObject >= todayDate);
+          break;
+        case "past":
+          matchesDate = Boolean(appointmentDateObject && todayDate && appointmentDateObject < todayDate);
+          break;
+        default:
+          matchesDate = true;
+      }
+    }
 
 
 
@@ -254,6 +341,13 @@ const VetAppointments = () => {
 
 
   });
+
+  const totalPages = Math.max(1, Math.ceil(filteredAppointments.length / rowsPerPage));
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+  const pageStart = (safeCurrentPage - 1) * rowsPerPage;
+  const paginatedAppointments = filteredAppointments.slice(pageStart, pageStart + rowsPerPage);
+  const visibleStart = filteredAppointments.length === 0 ? 0 : pageStart + 1;
+  const visibleEnd = Math.min(pageStart + rowsPerPage, filteredAppointments.length);
 
   const getBadgeClass = (statusValue) => {
     switch (statusValue) {
@@ -285,7 +379,7 @@ const VetAppointments = () => {
 
         <div>
 
-          <h1>Minhas Consultas</h1>
+          <h1>Consultas</h1>
 
           <p>
             Gere as consultas dos animais atribuídos a si.
@@ -468,243 +562,234 @@ const VetAppointments = () => {
 
       </div>
 
+      <div className="appointments-secondary-filters">
 
+        <div className="appointments-results-summary">
+          {filteredAppointments.length === 0
+            ? "Sem consultas para os filtros aplicados"
+            : `A mostrar ${visibleStart}-${visibleEnd} de ${filteredAppointments.length} consultas`}
+        </div>
 
+        <div className="appointments-secondary-actions">
 
+          <label className="appointments-inline-select">
+            <span>Período</span>
+            <Select
+              className="appointments-select appointments-select--compact"
+              classNamePrefix="appointments-select"
+              options={dateFilterOptions}
+              value={dateFilter}
+              onChange={setDateFilter}
+              isSearchable={false}
+              isDisabled={Boolean(selectedDate)}
+            />
+          </label>
 
-
-
-
-      <div className="appointments-list">
-
-
-
-        {
-          loading && <p>A carregar consultas...</p>
-        }
-
-
-
-
-        {
-          !loading && filteredAppointments.map((appointment)=>(
-
-
-
-            <div
-              className="appointment-item"
-              key={appointment.id_appointment}
+          <label className="appointments-inline-select appointments-inline-select--rows">
+            <span>Mostrar</span>
+            <select
+              className="appointments-native-select"
+              value={rowsPerPage}
+              onChange={(e) => setRowsPerPage(Number(e.target.value))}
+              aria-label="Quantidade de consultas por página"
             >
-
-
-
-              <div className="appointment-left">
-
-
-
-                <div className="appointment-avatar">
-                  {appointment.petPhoto ? (
-                    <img src={appointment.petPhoto} alt={appointment.petName || "Animal"} />
-                  ) : (
-                    <i className="bi bi-heart-pulse"></i>
-                  )}
-                </div>
-
-
-
-
-
-                <div>
-
-
-                  <h3>
-                    {appointment.petName || "Animal"}
-                  </h3>
-
-
-                  <p>
-                    <i className="bi bi-person-fill me-2"></i>
-                    Dono: {appointment.ownerName || "Não informado"}
-                  </p>
-
-
-
-                  <p>
-                    <i className="bi bi-clipboard2-pulse me-2"></i>
-                    {appointment.motivo || "Consulta"}
-                  </p>
-
-
-
-
-
-                  <div className="appointment-info">
-
-
-                    <span>
-                      <i className="bi bi-calendar"></i>
-                      {appointment.data}
-                    </span>
-
-
-
-
-                    <span>
-                      <i className="bi bi-clock"></i>
-                      {appointment.hora}
-                    </span>
-
-
-
-                  </div>
-
-
-
-                </div>
-
-
-
-              </div>
-
-
-
-
-
-
-
-
-              <div className="appointment-right">
-
-
-                <span className={`status-badge ${getBadgeClass(appointment.estado)}`}>
-
-                  {appointment.estado}
-
-                </span>
-
-
-
-
-
-
-                <div className="appointment-actions">
-
-
-
-                  <button
-
-                    className="details-btn"
-
-                    onClick={() => showDetails(appointment)}
-
-                  >
-
-                    Ver detalhes
-
-                  </button>
-
-
-
-
-
-
-
-                  {
-                    appointment.estado === "Pendente" &&
-
-                    <>
-
-
-                      <button
-
-                        className="confirm-btn"
-
-                        onClick={() =>
-                          updateStatus(
-                            appointment.id_appointment,
-                            "Confirmada"
-                          )
-                        }
-
-                      >
-
-                        Aceitar
-
-                      </button>
-
-
-
-
-
-                      <button
-
-                        className="cancel-btn"
-
-                        onClick={() =>
-                          updateStatus(
-                            appointment.id_appointment,
-                            "Cancelada"
-                          )
-                        }
-
-                      >
-
-                        Rejeitar
-
-                      </button>
-
-
-                    </>
-
-                  }
-
-
-
-
-
-
-
-                  {
-                    appointment.estado === "Confirmada" &&
-
-
-                    <button
-
-                      className="complete-btn"
-
-                      onClick={() => handleFinalizeAppointment(appointment)}
-
-                    >
-
-                      Marcar como concluída
-
-                    </button>
-
-                  }
-
-
-
-
-
-                </div>
-
-
-              </div>
-
-
-
-            </div>
-
-
-          ))
-
-        }
-
-
-
-
+              {rowsPerPageOptions.map((value) => (
+                <option key={value} value={value}>
+                  {value} por página
+                </option>
+              ))}
+            </select>
+          </label>
+
+        </div>
 
       </div>
+
+
+
+
+
+
+
+
+     <div className="appointments-table-wrapper">
+
+  {loading ? (
+
+    <p className="appointments-feedback">A carregar consultas...</p>
+
+  ) : filteredAppointments.length === 0 ? (
+
+    <p className="appointments-feedback">Não existem consultas para os filtros selecionados.</p>
+
+  ) : (
+
+    <table className="appointments-table">
+
+      <thead>
+
+        <tr>
+
+          <th>Animal</th>
+
+          <th>Dono</th>
+
+          <th>Motivo</th>
+
+          <th>Data</th>
+
+          <th>Hora</th>
+
+          <th>Estado</th>
+
+          <th>Ações</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {paginatedAppointments.map((appointment) => (
+
+          <tr key={appointment.id_appointment}>
+
+            <td data-label="Animal">
+
+              <div className="pet-cell">
+
+                {appointment.petPhoto ? (
+
+                  <img
+                    src={appointment.petPhoto}
+                    alt={appointment.petName}
+                  />
+
+                ) : (
+
+                  <i className="bi bi-heart-pulse"></i>
+
+                )}
+
+                <span>{appointment.petName}</span>
+
+              </div>
+
+            </td>
+
+            <td data-label="Dono">{appointment.ownerName}</td>
+
+            <td data-label="Motivo">{appointment.motivo}</td>
+
+            <td data-label="Data">{appointment.data}</td>
+
+            <td data-label="Hora">{appointment.hora?.slice(0,5)}</td>
+
+            <td data-label="Estado">
+
+              <span className={`status-badge ${getBadgeClass(appointment.estado)}`}>
+                {appointment.estado}
+              </span>
+
+            </td>
+
+            <td data-label="Ações">
+
+              <div className="table-actions">
+
+                <button
+                  className="details-btn"
+                  onClick={() => showDetails(appointment)}
+                >
+                  <i className="bi bi-eye"></i>
+                </button>
+
+                {appointment.estado === "Pendente" && (
+
+                  <>
+
+                    <button
+                      className="confirm-btn"
+                      onClick={() =>
+                        updateStatus(
+                          appointment.id_appointment,
+                          "Confirmada"
+                        )
+                      }
+                    >
+                      <i className="bi bi-check-lg"></i>
+                    </button>
+
+                    <button
+                      className="cancel-btn"
+                      onClick={() =>
+                        updateStatus(
+                          appointment.id_appointment,
+                          "Cancelada"
+                        )
+                      }
+                    >
+                      <i className="bi bi-x-lg"></i>
+                    </button>
+
+                  </>
+
+                )}
+
+                {appointment.estado === "Confirmada" && (
+
+                  <button
+                    className="complete-btn"
+                    onClick={() => handleFinalizeAppointment(appointment)}
+                  >
+                    <i className="bi bi-clipboard-check"></i>
+                  </button>
+
+                )}
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        ))}
+
+      </tbody>
+
+    </table>
+
+  )}
+
+</div>
+
+      {!loading && filteredAppointments.length > 0 && totalPages > 1 && (
+        <div className="appointments-pagination">
+
+          <button
+            type="button"
+            className="pagination-btn"
+            onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
+            disabled={safeCurrentPage === 1}
+          >
+            Anterior
+          </button>
+
+          <span className="pagination-info">
+            Página {safeCurrentPage} de {totalPages}
+          </span>
+
+          <button
+            type="button"
+            className="pagination-btn"
+            onClick={() => setCurrentPage((page) => Math.min(page + 1, totalPages))}
+            disabled={safeCurrentPage === totalPages}
+          >
+            Seguinte
+          </button>
+
+        </div>
+      )}
 
 
 

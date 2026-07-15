@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import api from "../../services/api";
-import "./VetProfile.css";
+import "./AdminProfile.css";
 
 const formatMemberSince = (createdAt) => {
   if (!createdAt) return "Não disponível";
@@ -16,7 +16,7 @@ const formatMemberSince = (createdAt) => {
   }).format(date);
 };
 
-const Profile = () => {
+const AdminProfile = () => {
   const [user, setUser] = useState(null);
   const [editing, setEditing] = useState(false);
   const [showPasswordForm, setShowPasswordForm] = useState(false);
@@ -381,4 +381,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default AdminProfile;

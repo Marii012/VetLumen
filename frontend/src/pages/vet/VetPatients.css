@@ -752,3 +752,310 @@ color:#78cc28;
 font-weight:600;
 
 }
+
+/* ================= TABELA DE PACIENTES ================= */
+
+.pets-table-wrapper{
+    overflow-x:auto;
+    background:#ffffff;
+    border:1px solid #e2e8f0;
+    border-radius:20px;
+    box-shadow:0 4px 12px rgba(15,23,42,.04);
+}
+
+.pets-table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    min-width:1080px;
+}
+
+.pets-table thead th{
+    padding:18px 20px;
+    background:#f8fafc;
+    border-bottom:1px solid #e2e8f0;
+    color:#475569;
+    font-size:.82rem;
+    font-weight:700;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    text-align:left;
+}
+
+.pets-table thead th:first-child{
+    border-top-left-radius:20px;
+}
+
+.pets-table thead th:last-child{
+    border-top-right-radius:20px;
+}
+
+.pets-table tbody td{
+    padding:18px 20px;
+    border-bottom:1px solid #eef2f7;
+    color:#1e293b;
+    font-size:.95rem;
+    vertical-align:middle;
+}
+
+.pets-table tbody tr:last-child td{
+    border-bottom:none;
+}
+
+.pets-table tbody tr:hover td{
+    background:#fcfdf8;
+}
+
+.pet-table-cell{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    min-width:240px;
+}
+
+.pet-table-avatar{
+    width:56px;
+    height:56px;
+    flex-shrink:0;
+    border-radius:16px;
+    background:#f8fafc;
+    color:#78cc28;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.4rem;
+    overflow:hidden;
+}
+
+.pet-table-avatar .pet-image{
+    width:100%;
+    height:100%;
+    border-radius:0;
+}
+
+.pet-table-primary{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.pet-table-primary strong{
+    color:#0f172a;
+    font-size:1rem;
+}
+
+.pet-table-primary span,
+.pet-table-stack span{
+    color:#64748b;
+    font-size:.9rem;
+}
+
+.pet-table-stack{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.pet-status-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:9px 18px;
+    border-radius:999px;
+    background:#e9f9dc;
+    color:#5ea91d;
+    border:1px solid #cfeeb3;
+    font-size:.82rem;
+    font-weight:700;
+    letter-spacing:.03em;
+}
+
+.pet-table-actions{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.pet-table-actions button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:38px;
+    height:38px;
+    padding:0;
+    border:1px solid transparent;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+    background:#f1f5f9;
+}
+
+.pet-table-actions button i{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    font-size:1rem;
+    line-height:1;
+}
+
+.pet-table-actions .details-btn{
+    background:#eff6ff;
+    border-color:#bfdbfe;
+    color:#0284c7;
+}
+
+.pet-table-actions .history-btn{
+    background:#f5f3ff;
+    border-color:#ddd6fe;
+    color:#7c3aed;
+}
+
+.pet-table-actions .vaccine-btn{
+    background:#f7fee7;
+    border-color:#d9f99d;
+    color:#65a30d;
+}
+
+.pet-table-actions .add-record-btn{
+    background:#eff6ff;
+    border-color:#bfdbfe;
+    color:#2563eb;
+}
+
+.pet-table-actions button:hover,
+.pet-table-actions button:focus-visible{
+    transform:translateY(-2px);
+}
+
+.pet-table-actions .details-btn:hover,
+.pet-table-actions .details-btn:focus-visible{
+    background:#e0f2fe;
+    border-color:#7dd3fc;
+    color:#0284c7;
+}
+
+.pet-table-actions .history-btn:hover,
+.pet-table-actions .history-btn:focus-visible{
+    background:#ede9fe;
+    border-color:#c4b5fd;
+    color:#7c3aed;
+}
+
+.pet-table-actions .vaccine-btn:hover,
+.pet-table-actions .vaccine-btn:focus-visible{
+    background:#ecfccb;
+    border-color:#bef264;
+    color:#65a30d;
+}
+
+.pet-table-actions .add-record-btn:hover,
+.pet-table-actions .add-record-btn:focus-visible{
+    background:#dbeafe;
+    border-color:#93c5fd;
+    color:#2563eb;
+}
+
+@media (max-width: 992px) {
+    .pets-container {
+        margin-left:0;
+        padding:30px;
+    }
+
+    .pets-filters {
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .pets-select__control {
+        min-width:100% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .pets-container {
+        padding:20px;
+    }
+
+    .pets-table-wrapper {
+        overflow:visible;
+        border:none;
+        background:transparent;
+        box-shadow:none;
+    }
+
+    .pets-table {
+        min-width:0;
+    }
+
+    .pets-table thead {
+        display:none;
+    }
+
+    .pets-table,
+    .pets-table tbody,
+    .pets-table tr,
+    .pets-table td {
+        display:block;
+        width:100%;
+    }
+
+    .pets-table tbody {
+        display:flex;
+        flex-direction:column;
+        gap:16px;
+    }
+
+    .pets-table tbody tr {
+        padding:18px;
+        background:#ffffff;
+        border:1px solid #e2e8f0;
+        border-radius:18px;
+        box-shadow:0 4px 12px rgba(15,23,42,.04);
+    }
+
+    .pets-table tbody td {
+        padding:0;
+        border-bottom:none;
+    }
+
+    .pets-table tbody td + td {
+        margin-top:14px;
+    }
+
+    .pets-table tbody td::before {
+        content:attr(data-label);
+        display:block;
+        margin-bottom:6px;
+        color:#64748b;
+        font-size:.78rem;
+        font-weight:700;
+        letter-spacing:.04em;
+        text-transform:uppercase;
+    }
+
+    .pet-table-cell {
+        min-width:0;
+    }
+}
+
+@media (max-width: 480px) {
+    .pets-container {
+        padding:16px;
+    }
+
+    .pets-header h1 {
+        font-size:1.35rem;
+    }
+
+    .pets-header p {
+        font-size:.9rem;
+    }
+
+    .pet-table-actions {
+        justify-content:flex-start;
+    }
+}

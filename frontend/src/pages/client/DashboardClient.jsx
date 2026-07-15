@@ -139,6 +139,7 @@ const Dashboard = () => {
   }, [appointments, selectedYear]);
 
   return (
+    <div className="client-dashboard">
     <main className="dashboard-container">
 
       {/* Cabeçalho */}
@@ -403,6 +404,7 @@ const Dashboard = () => {
 
 
     </main>
+    </div>
   );
 };
 

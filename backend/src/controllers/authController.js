@@ -11,7 +11,7 @@ const authController = {
   // ==========================================
   register: async (req, res) => {
     try {
-      const { first_name, last_name, email, password, id_role } = req.body;
+      const { first_name, last_name, email, password, telefone, id_role } = req.body;
 
       // 1. Validação básica de campos obrigatórios
       if (!first_name || !last_name || !email || !password) {
@@ -44,7 +44,9 @@ const authController = {
         last_name,
         email,
         password: passwordHash,
-        id_role: defaultRole
+        telefone: telefone || null,
+        id_role: Number(defaultRole) || 1,
+        created_at: new Date()
       });
 
       // 6. Resposta sem devolver password
@@ -55,6 +57,7 @@ const authController = {
           first_name: newUser.first_name,
           last_name: newUser.last_name,
           email: newUser.email,
+          telefone: newUser.telefone,
           id_role: newUser.id_role
         }
       });

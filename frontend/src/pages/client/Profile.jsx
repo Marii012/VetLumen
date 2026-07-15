@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import api from "../../services/api";
 import "./Profile.css";
 
@@ -158,7 +159,18 @@ const Profile = () => {
       setPasswordForm({ currentPassword: "", newPassword: "", confirmPassword: "" });
       setShowPasswordForm(false);
       setError("");
-      alert(response.data.message || "Palavra-passe alterada com sucesso!");
+
+      Swal.fire({
+        title: "Sucesso",
+        text: response.data.message || "Palavra-passe alterada com sucesso!",
+        icon: "success",
+        customClass: {
+          popup: "vetlumen-swal-popup",
+          title: "vetlumen-swal-title",
+          htmlContainer: "vetlumen-swal-text",
+          confirmButton: "vetlumen-swal-button"
+        }
+      });
     } catch (err) {
       console.error("Erro ao alterar palavra-passe:", err);
       setError(err.response?.data?.message || "Não foi possível alterar a palavra-passe.");

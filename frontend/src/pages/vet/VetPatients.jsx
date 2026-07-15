@@ -148,59 +148,84 @@ const VetPatients = () => {
       )}
 
       {!loading && !error && filteredPets.length > 0 && (
-        <div className="pets-grid">
-          {filteredPets.map((pet) => (
-            <div className="pet-card" key={pet.id_pet}>
-              <img
-                src={getPetImageUrl(pet.fotografia) || "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=800&q=80"}
-                className="pet-image"
-                alt={pet.nome}
-              />
+        <div className="pets-table-wrapper">
+          <table className="pets-table">
+            <thead>
+              <tr>
+                <th>Animal</th>
+                <th>Espécie</th>
+                <th>Raça</th>
+                <th>Idade / Peso</th>
+                <th>Dono</th>
+                <th>Estado</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
 
-              <div className="pet-info">
-                <h3>{pet.nome}</h3>
-                <p>{getSpeciesLabel(pet.id_species, speciesOptions)}</p>
-                <span>{getBreedLabel(pet)}</span>
-                <small>{getAgeLabel(pet.data_nascimento)} {pet.peso ? `${pet.peso}kg` : "Peso não registado"}</small>
-                <small className="pet-owner">
-                  <i className="bi bi-person-fill"></i>
-                  Dono: {pet.ownerName}
-                </small>
+            <tbody>
+              {filteredPets.map((pet) => (
+                <tr key={pet.id_pet}>
+                  <td data-label="Animal">
+                    <div className="pet-table-cell">
+                      <div className="pet-table-avatar">
+                        {getPetImageUrl(pet.fotografia) ? (
+                          <img
+                            src={getPetImageUrl(pet.fotografia)}
+                            className="pet-image"
+                            alt={pet.nome}
+                          />
+                        ) : (
+                          <i className="bi bi-heart-pulse"></i>
+                        )}
+                      </div>
 
-                <div className="pet-extra">
-                  <div>
-                    <i className="bi bi-shield-check"></i>
-                    <strong>Estado</strong>
-                    <p>{pet.estado || "Ativo"}</p>
-                  </div>
+                      <div className="pet-table-primary">
+                        <strong>{pet.nome}</strong>
+                        <span>{formatDate(pet.data_nascimento)}</span>
+                      </div>
+                    </div>
+                  </td>
 
-                  <div>
-                    <i className="bi bi-calendar3"></i>
-                    <strong>Nascimento</strong>
-                    <p>{formatDate(pet.data_nascimento)}</p>
-                  </div>
-                </div>
-              </div>
+                  <td data-label="Espécie">{getSpeciesLabel(pet.id_species, speciesOptions)}</td>
 
-              <div className="pet-actions">
-                <button className="details-btn" onClick={() => navigate(`/vet/patients/${pet.id_pet}`)} title="Detalhes">
-                  <i className="bi bi-eye"></i>
-                </button>
+                  <td data-label="Raça">{getBreedLabel(pet) || "Não definida"}</td>
 
-                <button className="history-btn" onClick={() => navigate(`/vet/patients/${pet.id_pet}/history`)} title="Histórico">
-                  <i className="bi bi-file-medical"></i>
-                </button>
+                  <td data-label="Idade / Peso">
+                    <div className="pet-table-stack">
+                      <span>{getAgeLabel(pet.data_nascimento)}</span>
+                      <span>{pet.peso ? `${pet.peso}kg` : "Peso não registado"}</span>
+                    </div>
+                  </td>
 
-                <button className="vaccine-btn" onClick={() => navigate(`/vet/patients/${pet.id_pet}/vaccines`)} title="Vacinas">
-                  <i className="bi bi-capsule"></i>
-                </button>
+                  <td data-label="Dono">{pet.ownerName}</td>
 
-                <button className="add-record-btn" onClick={() => handleAddClinicalRecord(pet)} title="Acrescentar registo clínico">
-                  <i className="bi bi-plus-circle"></i>
-                </button>
-              </div>
-            </div>
-          ))}
+                  <td data-label="Estado">
+                    <span className="pet-status-badge">{pet.estado || "Ativo"}</span>
+                  </td>
+
+                  <td data-label="Ações">
+                    <div className="pet-table-actions">
+                      <button className="details-btn" onClick={() => navigate(`/vet/patients/${pet.id_pet}`)} title="Detalhes">
+                        <i className="bi bi-eye"></i>
+                      </button>
+
+                      <button className="history-btn" onClick={() => navigate(`/vet/patients/${pet.id_pet}/history`)} title="Histórico">
+                        <i className="bi bi-file-medical"></i>
+                      </button>
+
+                      <button className="vaccine-btn" onClick={() => navigate(`/vet/patients/${pet.id_pet}/vaccines`)} title="Vacinas">
+                        <i className="bi bi-capsule"></i>
+                      </button>
+
+                      <button className="add-record-btn" onClick={() => handleAddClinicalRecord(pet)} title="Acrescentar registo clínico">
+                        <i className="bi bi-plus-circle"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </main>

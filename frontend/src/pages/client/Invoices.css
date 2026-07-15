@@ -75,6 +75,20 @@ gap:18px;
 
 box-shadow:0 10px 25px rgba(0,0,0,.05);
 
+transition:all .3s ease;
+
+border:1px solid #e2e8f0;
+
+}
+
+.invoice-stat:hover{
+
+transform:translateY(-4px);
+
+border-color:#d5dee8;
+
+box-shadow:0 16px 35px rgba(15,23,42,.08);
+
 }
 
 
@@ -174,6 +188,20 @@ align-items:center;
 gap:20px;
 
 box-shadow:0 10px 25px rgba(0,0,0,.05);
+
+transition:all .3s ease;
+
+border:1px solid #e2e8f0;
+
+}
+
+.invoice-card:hover{
+
+transform:translateY(-4px);
+
+border-color:#d5dee8;
+
+box-shadow:0 16px 35px rgba(15,23,42,.08);
 
 }
 
@@ -333,15 +361,19 @@ color:#dc2626;
 /* BOTÃO */
 
 
-.details-btn{
+.invoices-container .details-btn{
 
-border:none;
+border:1px solid #78cc28;
 
-background:#f8fafc;
+background:#ffffff;
 
-padding:10px 15px;
+padding:11px 20px;
 
 border-radius:12px;
+
+color:#3f6212;
+
+font-weight:600;
 
 cursor:pointer;
 
@@ -351,11 +383,21 @@ transition:.25s;
 
 
 
-.details-btn:hover{
+.invoices-container .details-btn:hover,
+.invoices-container .details-btn:focus,
+.invoices-container .details-btn:focus-visible{
 
-background:#eaf8de;
+background:#f7fff1;
 
-color:#78cc28;
+color:#3f6212;
+
+border-color:#3f6212;
+
+transform:none;
+
+box-shadow:none;
+
+outline:none;
 
 }
 
@@ -401,27 +443,41 @@ color:#78cc28;
 }
 
 /* Reuse search-box styles from Appointments for consistent search UI */
-.search-box{
+.invoices-container .details-btn{
 	flex:1;
-	display:flex;
+border:1px solid #78cc28;
 	align-items:center;
-	gap:12px;
+background:#ffffff;
 	height:54px;
-	padding:0 18px;
+padding:11px 20px;
 	background:#fff;
 	border:1px solid #e2e8f0;
 	border-radius:16px;
+color:#3f6212;
+
+font-weight:600;
+
 	transition:.25s;
 }
 
 .search-box:focus-within{
 	border-color:#78cc28;
 	box-shadow:0 0 0 4px rgba(120,204,40,0.12);
-}
+.invoices-container .details-btn:hover,
+.invoices-container .details-btn:focus,
+.invoices-container .details-btn:focus-visible{
 
-.search-box i{
+background:#f7fff1;
 	color:#94a3b8;
-	font-size:1rem;
+color:#3f6212;
+
+border-color:#3f6212;
+
+transform:none;
+
+box-shadow:none;
+
+outline:none;
 }
 
 .search-box input{
@@ -435,4 +491,4 @@ color:#78cc28;
 
 .search-box input::placeholder{
 	color:#94a3b8;
-}
+}}

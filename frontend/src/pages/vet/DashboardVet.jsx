@@ -143,6 +143,7 @@ const DashboardVet = () => {
 
 
   return (
+    <div className="vet-dashboard">
     <main className="dashboard-container">
 
 
@@ -519,7 +520,7 @@ const DashboardVet = () => {
                 </p>
 
 
-                <button className="details-btn" onClick={() => navigate("/vet/appointments")}>
+                <button className="pending-view-btn" onClick={() => navigate("/vet/appointments")}>
                   Ver
                 </button>
 
@@ -551,6 +552,7 @@ const DashboardVet = () => {
 
 
     </main>
+    </div>
   );
 };
 

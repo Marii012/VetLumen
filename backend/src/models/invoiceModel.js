@@ -50,6 +50,12 @@ const Invoice = sequelize.define('Invoice', {
     type: DataTypes.INTEGER,
     allowNull: false,
     field: 'id_user'
+  },
+
+  id_appointment: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    field: 'id_appointment'
   }
 
 }, {

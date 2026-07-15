@@ -989,11 +989,11 @@
 
 /* botão detalhes */
 
-.details-btn{
+.appointments-container .appointment-actions .details-btn{
 
     padding:11px 20px;
 
-    border:1px solid #78cc28;
+    border:1px solid #e2e8f0 !important;
 
     border-radius:12px;
 
@@ -1001,7 +1001,7 @@
 
     color:#3f6212;
 
-    font-weight:700;
+    font-weight:600;
 
     cursor:pointer;
 
@@ -1009,15 +1009,21 @@
 
 }
 
-.details-btn:hover{
+.appointments-container .appointment-actions .details-btn:hover,
+.appointments-container .appointment-actions .details-btn:focus,
+.appointments-container .appointment-actions .details-btn:focus-visible{
 
-    background:#78cc28;
+    background:#f7fff1;
 
-    color:white;
+    color:#3f6212;
 
-    transform:translateY(-2px);
+    border-color:#3f6212 !important;
 
-    box-shadow:0 10px 22px rgba(120,204,40,.25);
+    transform:none;
+
+    box-shadow:none !important;
+
+    outline:none;
 
 }
 
