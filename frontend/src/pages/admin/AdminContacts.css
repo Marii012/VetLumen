@@ -222,15 +222,60 @@ body {
   font-weight: 600;
 }
 
-.admin-contacts .contacts-filter-select {
-  min-height: 54px;
+.admin-contacts .admin-contacts-select {
+  width: 100%;
+}
+
+.admin-contacts .admin-contacts-select__control {
+  min-height: 54px !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+  transition: 0.25s;
+  padding: 0 14px !important;
+  font-size: 0.95rem !important;
+  background: #ffffff !important;
+}
+
+.admin-contacts .admin-contacts-select__control:hover {
+  border-color: #78cc28 !important;
+}
+
+.admin-contacts .admin-contacts-select__control--is-focused {
+  border-color: #78cc28 !important;
+  box-shadow: 0 0 0 0.2rem rgba(120, 204, 40, 0.15) !important;
+}
+
+.admin-contacts .admin-contacts-select__indicator-separator {
+  display: none;
+}
+
+.admin-contacts .admin-contacts-select__dropdown-indicator {
+  color: #94a3b8 !important;
+}
+
+.admin-contacts .admin-contacts-select__placeholder {
+  color: #94a3b8 !important;
+}
+
+.admin-contacts .admin-contacts-select__menu {
+  border-radius: 14px;
+  overflow: hidden;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 0 14px;
-  background: #ffffff;
-  color: #1e293b;
-  font-size: 0.95rem;
-  outline: none;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.admin-contacts .admin-contacts-select__option {
+  cursor: pointer;
+}
+
+.admin-contacts .admin-contacts-select__option--is-focused {
+  background-color: #f1f5f9 !important;
+}
+
+.admin-contacts .admin-contacts-select__option--is-selected {
+  background-color: #78cc28 !important;
+  color: #ffffff !important;
 }
 
 .admin-contacts .contacts-list {
@@ -354,8 +399,38 @@ body {
   align-items: flex-start;
 }
 
+.admin-contacts .contact-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .admin-contacts .contact-action-btn {
-  min-width: 190px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-contacts .contact-action-btn--status {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.admin-contacts .contact-action-btn--delete {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.admin-contacts .contact-action-btn:hover {
+  transform: translateY(-1px);
 }
 
 .admin-contacts .contacts-empty-state {
