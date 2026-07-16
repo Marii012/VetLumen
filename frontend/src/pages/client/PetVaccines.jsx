@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./PetVaccines.css";
 import api from "../../services/api";
 
@@ -14,7 +15,7 @@ const PetVaccines = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const isVetView = location.pathname.startsWith("/vet/");
+  const isEditable = location.pathname.startsWith("/vet/") || location.pathname.startsWith("/admin/");
   const [vaccines, setVaccines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -94,6 +95,28 @@ const PetVaccines = () => {
       setError(err.response?.data?.message || "Não foi possível atualizar a vacina.");
     } finally {
       setSavingVaccineId(null);
+    }
+  };
+
+  const handleDeleteVaccine = async (vaccineId) => {
+    const result = await Swal.fire({
+      title: "Eliminar vacina?",
+      text: "Tem a certeza que pretende eliminar esta vacina?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar"
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      await api.delete(`/vaccines/${vaccineId}`);
+      await loadVaccines();
+      Swal.fire({ title: "Eliminado!", text: "Vacina eliminada.", icon: "success" });
+    } catch (err) {
+      console.error(err);
+      Swal.fire({ title: "Erro", text: "Não foi possível eliminar a vacina.", icon: "error" });
     }
   };
 
@@ -207,7 +230,7 @@ const PetVaccines = () => {
                   )}
                 </p>
 
-                {isVetView && (
+                {isEditable && (
                   <div className="vaccine-actions">
                     {editingVaccineId === vaccine.id_vaccine ? (
                       <>
@@ -223,9 +246,14 @@ const PetVaccines = () => {
                         </button>
                       </>
                     ) : (
-                      <button className="inline-edit-btn" onClick={() => handleStartEdit(vaccine)}>
-                        Editar
-                      </button>
+                      <>
+                        <button className="inline-edit-btn" onClick={() => handleStartEdit(vaccine)}>
+                          Editar
+                        </button>
+                        <button className="inline-delete-btn" onClick={() => handleDeleteVaccine(vaccine.id_vaccine)}>
+                          Eliminar
+                        </button>
+                      </>
                     )}
                   </div>
                 )}

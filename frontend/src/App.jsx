@@ -39,6 +39,7 @@ import AdminProfile from "./pages/admin/AdminProfile";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminPets from "./pages/admin/AdminPets";
 import AdminAddPetPage from "./pages/admin/AdminAddPetPage";
+import AdminEditPetPage from "./pages/admin/AdminEditPetPage";
 import AdminAppointments from "./pages/admin/AdminMarkings";
 import AdminAddAppointmentPage from "./pages/admin/AdminAddAppointmentPage";
 import AdminInvoices from "./pages/admin/AdminInvoices";
@@ -101,6 +102,7 @@ function App() {
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/pets" element={<AdminPets />} />
           <Route path="/admin/pets/add" element={<AdminAddPetPage />} />
+          <Route path="/admin/pets/:id/edit" element={<AdminEditPetPage />} />
           <Route path="/admin/appointments" element={<AdminAppointments />} />
           <Route path="/admin/appointments/add" element={<AdminAddAppointmentPage />} />
           <Route path="/admin/services" element={<AdminServices />} />

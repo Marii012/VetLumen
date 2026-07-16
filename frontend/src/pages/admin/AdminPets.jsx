@@ -676,7 +676,7 @@ const AdminPets = () => {
 														<i className="bi bi-capsule"></i>
 													</button>
 
-													<button className="edit-pet-btn" onClick={() => openPetForm(pet)} title="Editar animal">
+													<button className="edit-pet-btn" onClick={() => navigate(`/admin/pets/${pet.id_pet}/edit`)} title="Editar animal">
 														<i className="bi bi-pencil-square"></i>
 													</button>
 

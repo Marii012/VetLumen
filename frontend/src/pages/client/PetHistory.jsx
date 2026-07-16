@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./PetHistory.css";
 import api from "../../services/api";
 
@@ -14,7 +15,7 @@ const PetHistory = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const isVetView = location.pathname.startsWith("/vet/");
+  const isEditable = location.pathname.startsWith("/vet/") || location.pathname.startsWith("/admin/");
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -100,6 +101,28 @@ const PetHistory = () => {
     }
   };
 
+  const handleDeleteRecord = async (recordId) => {
+    const result = await Swal.fire({
+      title: "Eliminar registo?",
+      text: "Tem a certeza que pretende eliminar este registo clínico?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar"
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      await api.delete(`/medical-records/${recordId}`);
+      await loadHistory();
+      Swal.fire({ title: "Eliminado!", text: "Registo eliminado.", icon: "success" });
+    } catch (err) {
+      console.error(err);
+      Swal.fire({ title: "Erro", text: "Não foi possível eliminar o registo.", icon: "error" });
+    }
+  };
+
   return (
     <main className="history-container">
       <button className="back-btn" onClick={() => navigate(-1)}>
@@ -142,7 +165,7 @@ const PetHistory = () => {
                   <h3>{record.diagnostico}</h3>
                 )}
 
-                {isVetView && (
+                {isEditable && (
                   <div className="record-actions">
                     {editingRecordId === record.id_record ? (
                       <>
@@ -158,9 +181,14 @@ const PetHistory = () => {
                         </button>
                       </>
                     ) : (
-                      <button className="inline-edit-btn" onClick={() => handleStartEdit(record)}>
-                        Editar
-                      </button>
+                      <>
+                        <button className="inline-edit-btn" onClick={() => handleStartEdit(record)}>
+                          Editar
+                        </button>
+                        <button className="inline-delete-btn" onClick={() => handleDeleteRecord(record.id_record)}>
+                          Eliminar
+                        </button>
+                      </>
                     )}
                   </div>
                 )}
