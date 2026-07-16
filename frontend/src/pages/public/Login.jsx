@@ -47,14 +47,16 @@ function Login() {
     e.preventDefault();
   
     try {
+
+      const response = await login(formData);
   
       console.log("Resposta:", response);
 
-localStorage.setItem("token", response.token);
-localStorage.setItem("user", JSON.stringify(response.user));
-localStorage.setItem("role", response.user.id_role);
-
-console.log("Token após guardar:", localStorage.getItem("token"));
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("role", response.user.id_role);
+      
+      console.log("Token após guardar:", localStorage.getItem("token"));
   
       // Guardar JWT
       localStorage.setItem("token", response.token);
