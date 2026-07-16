@@ -15,7 +15,7 @@ const AddPetPage = () => {
     cor: "",
     estado: "Ativo",
     observacoes: "",
-    fotoFile: null,
+    fotografia: "",
   });
   const [speciesOptions, setSpeciesOptions] = useState([]);
   const [selectedSpecies, setSelectedSpecies] = useState(null);
@@ -95,16 +95,6 @@ const AddPetPage = () => {
         return;
       }
 
-      let fotografia = "";
-      if (formData.fotoFile) {
-        fotografia = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result);
-          reader.onerror = reject;
-          reader.readAsDataURL(formData.fotoFile);
-        });
-      }
-
       await api.post("/pets", {
         nome: formData.nome.trim(),
         id_species: Number(selectedSpecies.value),
@@ -115,7 +105,7 @@ const AddPetPage = () => {
         cor: formData.cor || null,
         estado: formData.estado || "Ativo",
         observacoes: formData.observacoes || null,
-        fotografia,
+        fotografia: formData.fotografia || null,
         id_user: userId,
       });
 
@@ -234,7 +224,26 @@ const AddPetPage = () => {
 
             <div className="profile-item add-pet-state-field">
             <label htmlFor="estado">Estado</label>
-            <input id="estado" name="estado" value={formData.estado} onChange={handleChange} className="profile-input" />
+            <Select
+              inputId="estado"
+              className="pet-form-select"
+              classNamePrefix="pet-form-select"
+              options={[
+                { value: "Ativo", label: "Ativo" },
+                { value: "Inativo", label: "Inativo" }
+              ]}
+              value={{
+                value: formData.estado,
+                label: formData.estado
+              }}
+              onChange={(option) =>
+                setFormData((previous) => ({
+                  ...previous,
+                  estado: option.value
+                }))
+              }
+              isSearchable={false}
+            />
             </div>
           </div>
 
@@ -244,13 +253,15 @@ const AddPetPage = () => {
           </div>
 
           <div className="profile-item full-width">
-            <label htmlFor="foto">Foto do animal</label>
+            <label htmlFor="fotografia">URL da fotografia</label>
             <input
-              id="foto"
-              type="file"
-              accept="image/*"
+              id="fotografia"
+              name="fotografia"
+              type="text"
+              value={formData.fotografia || ""}
+              onChange={handleChange}
               className="profile-input"
-              onChange={(event) => setFormData((previous) => ({ ...previous, fotoFile: event.target.files?.[0] || null }))}
+              placeholder="https://"
             />
           </div>
 
