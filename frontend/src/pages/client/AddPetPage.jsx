@@ -187,17 +187,31 @@ const AddPetPage = () => {
           <div className="profile-item add-pet-sex-field">
             <label htmlFor="sexo">Sexo</label>
           
-            <select
-              id="sexo"
-              name="sexo"
-              value={formData.sexo}
-              onChange={handleChange}
-              className="profile-input"
-            >
-              <option value="">Selecione o sexo</option>
-              <option value="F">Feminino</option>
-              <option value="M">Masculino</option>
-            </select>
+            <Select
+              inputId="sexo"
+              className="pet-form-select"
+              classNamePrefix="pet-form-select"
+              options={[
+                { value: "F", label: "Feminino" },
+                { value: "M", label: "Masculino" }
+              ]}
+              value={
+                formData.sexo
+                  ? {
+                      value: formData.sexo,
+                      label: formData.sexo === "F" ? "Feminino" : "Masculino"
+                    }
+                  : null
+              }
+              onChange={(option) =>
+                setFormData((previous) => ({
+                  ...previous,
+                  sexo: option?.value || ""
+                }))
+              }
+              isSearchable={false}
+              placeholder="Selecione o sexo"
+            />
           </div>
 
           <div className="add-pet-inline-row add-pet-metrics-row">
