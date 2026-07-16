@@ -75,7 +75,6 @@ const Sidebar = () => {
 
       window.setTimeout(() => {
         navigate("/login");
-        window.location.reload();
       }, 1800);
     }
   };
