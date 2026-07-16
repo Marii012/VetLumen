@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'petcare_chave_secreta_2026';
+const JWT_SECRET = 'VetLumen_2026_Secure_JWT_9Xf#82Lm@Qv!P7z';
 
 const authMiddleware = (req, res, next) => {
 

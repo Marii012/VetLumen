@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
 
-const JWT_SECRET = 'petcare_chave_secreta_2026';
+const JWT_SECRET = 'VetLumen_2026_Secure_JWT_9Xf#82Lm@Qv!P7z';
 
 const authController = {
 
