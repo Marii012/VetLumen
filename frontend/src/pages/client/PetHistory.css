@@ -175,6 +175,8 @@
 
     display:flex;
 
+    flex-wrap:wrap;
+
     gap:10px;
 
     margin-bottom:14px;
@@ -183,9 +185,10 @@
 
 .inline-edit-btn,
 .inline-save-btn,
-.inline-cancel-btn{
+.inline-cancel-btn,
+.inline-delete-btn{
 
-    border-radius:10px;
+    border-radius:12px;
 
     padding:8px 12px;
 
@@ -201,17 +204,67 @@
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.25s;
 
 }
 
 .inline-edit-btn:hover,
 .inline-save-btn:hover,
-.inline-cancel-btn:hover{
+.inline-cancel-btn:hover,
+.inline-delete-btn:hover{
 
-    border-color:#94a3b8;
+    transform:translateY(-1px);
 
-    background:#f8fafc;
+}
+
+.inline-edit-btn,
+.inline-delete-btn{
+
+    width:48px;
+
+    height:48px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.inline-edit-btn{
+
+    border-color:#bfdbfe;
+
+    background:#eff6ff;
+
+    color:#2563eb;
+
+}
+
+.inline-edit-btn:hover{
+
+    background:#dbeafe;
+
+    border-color:#93c5fd;
+
+}
+
+.inline-delete-btn{
+
+    border-color:#fecaca;
+
+    background:#fef2f2;
+
+    color:#dc2626;
+
+}
+
+.inline-delete-btn:hover{
+
+    background:#fee2e2;
+
+    border-color:#fca5a5;
 
 }
 
@@ -222,6 +275,16 @@
     background:#f7fff1;
 
     color:#3f6212;
+
+}
+
+.inline-cancel-btn{
+
+    border-color:#e2e8f0;
+
+    background:#f8fafc;
+
+    color:#475569;
 
 }
 

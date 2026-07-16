@@ -108,7 +108,14 @@ const PetHistory = () => {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Eliminar",
-      cancelButtonText: "Cancelar"
+      cancelButtonText: "Cancelar",
+      width: "min(460px, calc(100vw - 2rem))",
+      customClass: {
+        popup: "vetlumen-swal-popup",
+        title: "vetlumen-swal-title",
+        htmlContainer: "vetlumen-swal-text",
+        confirmButton: "vetlumen-swal-button"
+      }
     });
 
     if (!result.isConfirmed) return;
@@ -116,10 +123,32 @@ const PetHistory = () => {
     try {
       await api.delete(`/medical-records/${recordId}`);
       await loadHistory();
-      Swal.fire({ title: "Eliminado!", text: "Registo eliminado.", icon: "success" });
+      Swal.fire({
+        title: "Eliminado!",
+        text: "Registo eliminado.",
+        icon: "success",
+        width: "min(460px, calc(100vw - 2rem))",
+        customClass: {
+          popup: "vetlumen-swal-popup",
+          title: "vetlumen-swal-title",
+          htmlContainer: "vetlumen-swal-text",
+          confirmButton: "vetlumen-swal-button"
+        }
+      });
     } catch (err) {
       console.error(err);
-      Swal.fire({ title: "Erro", text: "Não foi possível eliminar o registo.", icon: "error" });
+      Swal.fire({
+        title: "Erro",
+        text: "Não foi possível eliminar o registo.",
+        icon: "error",
+        width: "min(460px, calc(100vw - 2rem))",
+        customClass: {
+          popup: "vetlumen-swal-popup",
+          title: "vetlumen-swal-title",
+          htmlContainer: "vetlumen-swal-text",
+          confirmButton: "vetlumen-swal-button"
+        }
+      });
     }
   };
 
@@ -182,11 +211,11 @@ const PetHistory = () => {
                       </>
                     ) : (
                       <>
-                        <button className="inline-edit-btn" onClick={() => handleStartEdit(record)}>
-                          Editar
+                        <button className="inline-edit-btn" onClick={() => handleStartEdit(record)} title="Editar registo">
+                          <i className="bi bi-pencil-square"></i>
                         </button>
-                        <button className="inline-delete-btn" onClick={() => handleDeleteRecord(record.id_record)}>
-                          Eliminar
+                        <button className="inline-delete-btn" onClick={() => handleDeleteRecord(record.id_record)} title="Eliminar registo">
+                          <i className="bi bi-trash"></i>
                         </button>
                       </>
                     )}

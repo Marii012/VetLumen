@@ -105,7 +105,14 @@ const PetVaccines = () => {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Eliminar",
-      cancelButtonText: "Cancelar"
+      cancelButtonText: "Cancelar",
+      width: "min(460px, calc(100vw - 2rem))",
+      customClass: {
+        popup: "vetlumen-swal-popup",
+        title: "vetlumen-swal-title",
+        htmlContainer: "vetlumen-swal-text",
+        confirmButton: "vetlumen-swal-button"
+      }
     });
 
     if (!result.isConfirmed) return;
@@ -113,10 +120,32 @@ const PetVaccines = () => {
     try {
       await api.delete(`/vaccines/${vaccineId}`);
       await loadVaccines();
-      Swal.fire({ title: "Eliminado!", text: "Vacina eliminada.", icon: "success" });
+      Swal.fire({
+        title: "Eliminado!",
+        text: "Vacina eliminada.",
+        icon: "success",
+        width: "min(460px, calc(100vw - 2rem))",
+        customClass: {
+          popup: "vetlumen-swal-popup",
+          title: "vetlumen-swal-title",
+          htmlContainer: "vetlumen-swal-text",
+          confirmButton: "vetlumen-swal-button"
+        }
+      });
     } catch (err) {
       console.error(err);
-      Swal.fire({ title: "Erro", text: "Não foi possível eliminar a vacina.", icon: "error" });
+      Swal.fire({
+        title: "Erro",
+        text: "Não foi possível eliminar a vacina.",
+        icon: "error",
+        width: "min(460px, calc(100vw - 2rem))",
+        customClass: {
+          popup: "vetlumen-swal-popup",
+          title: "vetlumen-swal-title",
+          htmlContainer: "vetlumen-swal-text",
+          confirmButton: "vetlumen-swal-button"
+        }
+      });
     }
   };
 
@@ -247,11 +276,11 @@ const PetVaccines = () => {
                       </>
                     ) : (
                       <>
-                        <button className="inline-edit-btn" onClick={() => handleStartEdit(vaccine)}>
-                          Editar
+                        <button className="inline-edit-btn" onClick={() => handleStartEdit(vaccine)} title="Editar vacina">
+                          <i className="bi bi-pencil-square"></i>
                         </button>
-                        <button className="inline-delete-btn" onClick={() => handleDeleteVaccine(vaccine.id_vaccine)}>
-                          Eliminar
+                        <button className="inline-delete-btn" onClick={() => handleDeleteVaccine(vaccine.id_vaccine)} title="Eliminar vacina">
+                          <i className="bi bi-trash"></i>
                         </button>
                       </>
                     )}
