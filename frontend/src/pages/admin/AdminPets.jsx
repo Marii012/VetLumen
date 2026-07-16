@@ -664,11 +664,23 @@ const AdminPets = () => {
 
 											<td data-label="Ações">
 												<div className="pets-actions">
-													<button className="edit-pet-btn" onClick={() => openPetForm(pet)}>
+													<button className="details-btn" onClick={() => navigate(`/vet/patients/${pet.id_pet}`)} title="Detalhes do animal">
+														<i className="bi bi-eye"></i>
+													</button>
+
+													<button className="history-btn" onClick={() => navigate(`/vet/patients/${pet.id_pet}/history`)} title="Histórico do animal">
+														<i className="bi bi-file-medical"></i>
+													</button>
+
+													<button className="vaccine-btn" onClick={() => navigate(`/vet/patients/${pet.id_pet}/vaccines`)} title="Vacinas do animal">
+														<i className="bi bi-capsule"></i>
+													</button>
+
+													<button className="edit-pet-btn" onClick={() => openPetForm(pet)} title="Editar animal">
 														<i className="bi bi-pencil-square"></i>
 													</button>
 
-													<button className="delete-pet-btn" onClick={() => handleDeletePet(pet)} disabled={currentPetId === pet.id_pet}>
+													<button className="delete-pet-btn" onClick={() => handleDeletePet(pet)} disabled={currentPetId === pet.id_pet} title="Eliminar animal">
 														<i className={currentPetId === pet.id_pet ? "bi bi-hourglass-split" : "bi bi-trash"}></i>
 													</button>
 												</div>

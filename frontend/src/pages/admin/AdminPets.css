@@ -425,12 +425,48 @@ html, body {
 .admin-pets .pet-sex-badge--none {
 	background: #f8fafc;
 	border: 1px solid #e2e8f0;
-	color: #64748b;
+	font-size: 1rem;
+}
+.admin-pets .details-btn {
+	color: #0284c7;
+	border-color: #bfdbfe;
+	background: #eff6ff;
+}
+.admin-pets .history-btn {
+	color: #7c3aed;
+	border-color: #ddd6fe;
+	background: #f5f3ff;
+}
+.admin-pets .vaccine-btn {
+	color: #65a30d;
+	border-color: #d9f99d;
+	background: #f7fee7;
 }
 
 .admin-pets .pet-state-badge--ativo {
 	background: #e9f9dc;
 	color: #5ea91d;
+.admin-pets .details-btn:hover,
+.admin-pets .details-btn:focus-visible {
+	background: #e0f2fe;
+	border-color: #7dd3fc;
+	color: #0284c7;
+	transform: translateY(-1px);
+}
+.admin-pets .history-btn:hover,
+.admin-pets .history-btn:focus-visible {
+	background: #ede9fe;
+	border-color: #c4b5fd;
+	color: #7c3aed;
+	transform: translateY(-1px);
+}
+.admin-pets .vaccine-btn:hover,
+.admin-pets .vaccine-btn:focus-visible {
+	background: #ecfccb;
+	border-color: #bef264;
+	color: #65a30d;
+	transform: translateY(-1px);
+}
 	border: 1px solid #cfeeb3;
 }
 
@@ -452,6 +488,9 @@ html, body {
 	white-space: nowrap;
 }
 
+.admin-pets .details-btn,
+.admin-pets .history-btn,
+.admin-pets .vaccine-btn,
 .admin-pets .edit-pet-btn,
 .admin-pets .delete-pet-btn {
 	width: 48px;
