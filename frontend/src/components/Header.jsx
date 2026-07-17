@@ -57,7 +57,7 @@ function Header() {
     });
   
     window.setTimeout(() => {
-      navigate("/login");
+      navigate("/");
     }, 1800);
   };
 

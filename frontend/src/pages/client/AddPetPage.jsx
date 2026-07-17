@@ -268,26 +268,23 @@ const AddPetPage = () => {
                 isSearchable={false}
               />
             </div>
-          </div>
+              <div className="profile-item add-pet-microchip-field">
+                <label>
+                  <input type="checkbox" name="has_microchip" checked={!!formData.has_microchip} onChange={handleChange} />{' '}
+                  Tem microchip?
+                </label>
 
-          <div className="add-pet-inline-row add-pet-microchip-row">
-            <div className="profile-item add-pet-microchip-field">
-              <label>
-                <input type="checkbox" name="has_microchip" checked={!!formData.has_microchip} onChange={handleChange} />{' '}
-                Tem microchip?
-              </label>
-
-              {formData.has_microchip && (
-                <input
-                  name="num_chip"
-                  value={formData.num_chip || ''}
-                  onChange={handleChange}
-                  className="profile-input mt-2"
-                  placeholder="Número do microchip"
-                />
-              )}
+                {formData.has_microchip && (
+                  <input
+                    name="num_chip"
+                    value={formData.num_chip || ''}
+                    onChange={handleChange}
+                    className="profile-input mt-2"
+                    placeholder="Número do microchip"
+                  />
+                )}
+              </div>
             </div>
-          </div>
 
           <div className="profile-item full-width">
             <label htmlFor="observacoes">Observações de saúde</label>

@@ -368,44 +368,7 @@ const EditPetPage = () => {
 
           </div>
 
-          <div className="add-pet-inline-row add-pet-porte-row">
-            <div className="profile-item add-pet-porte-field">
-              <label>Porte</label>
-              <Select
-                inputId="porte"
-                className="pet-form-select"
-                classNamePrefix="pet-form-select"
-                options={[
-                  { value: '', label: 'Sem indicação' },
-                  { value: 'Pequeno', label: 'Pequeno' },
-                  { value: 'Médio', label: 'Médio' },
-                  { value: 'Grande', label: 'Grande' }
-                ]}
-                value={formData.porte ? { value: formData.porte, label: formData.porte } : { value: '', label: 'Sem indicação' }}
-                onChange={(option) => setFormData((prev) => ({ ...prev, porte: option?.value || '' }))}
-                isSearchable={false}
-              />
-            </div>
-          </div>
-
-          <div className="add-pet-inline-row add-pet-microchip-row">
-            <div className="profile-item add-pet-microchip-field">
-              <label>
-                <input type="checkbox" name="has_microchip" checked={!!formData.has_microchip} onChange={handleChange} />{' '}
-                Tem microchip?
-              </label>
-
-              {formData.has_microchip && (
-                <input
-                  name="num_chip"
-                  value={formData.num_chip || ''}
-                  onChange={handleChange}
-                  className="profile-input mt-2"
-                  placeholder="Número do microchip"
-                />
-              )}
-            </div>
-          </div>
+          {/* porte + microchip will be rendered after status row to match AddPetPage order */}
 
 
 
@@ -658,6 +621,43 @@ const EditPetPage = () => {
 
 
 
+
+          <div className="add-pet-inline-row add-pet-porte-row">
+            <div className="profile-item add-pet-porte-field">
+              <label>Porte</label>
+              <Select
+                inputId="porte"
+                className="pet-form-select"
+                classNamePrefix="pet-form-select"
+                options={[
+                  { value: '', label: 'Sem indicação' },
+                  { value: 'Pequeno', label: 'Pequeno' },
+                  { value: 'Médio', label: 'Médio' },
+                  { value: 'Grande', label: 'Grande' }
+                ]}
+                value={formData.porte ? { value: formData.porte, label: formData.porte } : { value: '', label: 'Sem indicação' }}
+                onChange={(option) => setFormData((prev) => ({ ...prev, porte: option?.value || '' }))}
+                isSearchable={false}
+              />
+            </div>
+
+            <div className="profile-item add-pet-microchip-field">
+              <label>
+                <input type="checkbox" name="has_microchip" checked={!!formData.has_microchip} onChange={handleChange} />{' '}
+                Tem microchip?
+              </label>
+
+              {formData.has_microchip && (
+                <input
+                  name="num_chip"
+                  value={formData.num_chip || ''}
+                  onChange={handleChange}
+                  className="profile-input mt-2"
+                  placeholder="Número do microchip"
+                />
+              )}
+            </div>
+          </div>
 
           <div className="profile-item full-width">
 

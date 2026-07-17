@@ -69,7 +69,7 @@ const VetSidebar = () => {
     });
   
     window.setTimeout(() => {
-      navigate("/login");
+      navigate("/");
     }, 1800);
   };
 

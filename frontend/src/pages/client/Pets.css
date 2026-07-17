@@ -851,3 +851,28 @@ font-weight:600;
         grid-template-columns: 1fr;
     }
 }
+
+/* Form inline rows for Add/Edit pet */
+.add-pet-form .add-pet-inline-row{
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    margin-top:12px;
+}
+
+.add-pet-form .add-pet-inline-row .profile-item{
+    flex:1;
+    min-width:0;
+}
+
+.add-pet-microchip-field label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+    color:#334155;
+}
+
+.add-pet-microchip-field .profile-input{
+    margin-top:8px;
+}

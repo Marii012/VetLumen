@@ -215,59 +215,7 @@ const AdminUsers = () => {
 		}
 	};
 
-	const handleResetPassword = async (user) => {
-		const result = await Swal.fire({
-			title: 'Redefinir palavra-passe?',
-			text: `Será gerada uma nova palavra-passe para ${getFullName(user)}.`,
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonText: 'Redefinir',
-			cancelButtonText: 'Cancelar',
-			customClass: {
-				popup: 'vetlumen-swal-popup',
-				title: 'vetlumen-swal-title',
-				htmlContainer: 'vetlumen-swal-text',
-				confirmButton: 'vetlumen-swal-button'
-			}
-		});
-
-		if (!result.isConfirmed) return;
-
-		try {
-			const response = await api.post(`/users/${user.id_user}/reset-password`);
-			const newPassword = response.data?.password || '-';
-
-			Swal.fire({
-				title: 'Palavra-passe redefinida',
-				html: `
-					<div class="reset-password-result">
-						<p>Nova palavra-passe para <strong>${escapeHtml(getFullName(user))}</strong>:</p>
-						<div class="reset-password-code">${escapeHtml(newPassword)}</div>
-						<p>O utilizador pode entrar com esta password e alterá-la depois na conta.</p>
-					</div>
-				`,
-				icon: 'success',
-				customClass: {
-					popup: 'vetlumen-swal-popup user-modal-popup',
-					title: 'vetlumen-swal-title',
-					htmlContainer: 'vetlumen-swal-text',
-					confirmButton: 'vetlumen-swal-button'
-				}
-			});
-		} catch (err) {
-			Swal.fire({
-				title: 'Erro',
-				text: 'Não foi possível redefinir a palavra-passe.',
-				icon: 'error',
-				customClass: {
-					popup: 'vetlumen-swal-popup',
-					title: 'vetlumen-swal-title',
-					htmlContainer: 'vetlumen-swal-text',
-					confirmButton: 'vetlumen-swal-button'
-				}
-			});
-		}
-	};
+	// Redefinição de palavra-passe removida do painel de administração.
 
 	const refreshUser = async () => {
 		const response = await api.get("/users");
@@ -334,7 +282,7 @@ const AdminUsers = () => {
 					${isEditing ? `
 					<div class="user-swal-note">
 						<i class="bi bi-info-circle"></i>
-							<span>A palavra-passe não é alterada aqui. Use "Redefinir pass" na lista para gerar uma nova.</span>
+							<span>A palavra-passe não é alterada aqui.</span>
 					</div>
 					` : ""}
 				</div>
@@ -690,9 +638,7 @@ const AdminUsers = () => {
 														<i className="bi bi-pencil-square"></i>
 													</button>
 
-													<button className="reset-user-btn" onClick={() => handleResetPassword(user)} title="Redefinir pass" aria-label="Redefinir pass">
-														<i className="bi bi-key-fill"></i>
-													</button>
+
 
 													<button
 														className="delete-user-btn"

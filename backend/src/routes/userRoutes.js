@@ -8,7 +8,7 @@ router.get('/:id', userController.getUserById);
 
 router.put('/:id', userController.updateUser);
 
-router.post('/:id/reset-password', userController.resetUserPassword);
+// rota de reset-password removida: funcionalidade retirada do painel Admin
 
 router.delete('/:id', userController.deleteUser);
 

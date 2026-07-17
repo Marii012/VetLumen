@@ -69,7 +69,7 @@ const Sidebar = () => {
     });
   
     window.setTimeout(() => {
-      navigate("/login");
+      navigate("/");
     }, 1800);
   };
 
