@@ -8,6 +8,7 @@ const Dashboard = () => {
   const [pets, setPets] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [healthPercent, setHealthPercent] = useState(95);
+  const [pendingInvoices, setPendingInvoices] = useState(0);
   const [chartData, setChartData] = useState(new Array(12).fill(0));
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [availableYears, setAvailableYears] = useState([]);
@@ -73,6 +74,20 @@ const Dashboard = () => {
           setHealthPercent(health);
         } catch (err) {
           // non-fatal: manter valor padrão
+        }
+
+        // carregar faturas do utilizador e contar pendentes
+        try {
+          const invResp = await api.get('/invoices');
+          const invData = Array.isArray(invResp.data) ? invResp.data : [];
+          const userInvoices = invData.filter((inv) => Number(inv.id_user) === Number(userId));
+          const pendingCount = userInvoices.filter((inv) => {
+            const raw = String(inv.estado_pagamento || "").trim().toLowerCase();
+            return !["pago", "paid", "finalizado", "finalizada"].includes(raw);
+          }).length;
+          setPendingInvoices(pendingCount);
+        } catch (err) {
+          // ignore invoice errors
         }
 
       } catch (error) {
@@ -219,12 +234,12 @@ const Dashboard = () => {
         <div className="stat-card">
 
           <div className="stat-icon">
-            <i className="bi bi-shield-check"></i>
+            <i className="bi bi-file-earmark-text"></i>
           </div>
 
           <div>
-            <h3>{healthPercent}%</h3>
-            <p>Saúde geral</p>
+            <h3>{pendingInvoices || 0}</h3>
+            <p>Faturas pendentes</p>
           </div>
 
         </div>

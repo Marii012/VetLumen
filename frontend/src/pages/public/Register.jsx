@@ -18,7 +18,9 @@ function Register() {
     last_name: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    telefone: "",
+    indicativo_pais: "+351"
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -71,7 +73,13 @@ function Register() {
 
     try {
 
-      const response = await register(formData);
+      // combine country code + phone into telefone for backend
+      const payload = {
+        ...formData,
+        telefone: `${formData.indicativo_pais || ""} ${formData.telefone || ""}`.trim()
+      };
+
+      const response = await register(payload);
 
       console.log(response);
 
@@ -274,11 +282,35 @@ function Register() {
 
 
                 <div className="mb-3">
+                  <div className="custom-input-box p-2 px-3">
+                    <label className="d-block text-muted tiny-label mb-0">Telefone</label>
+
+                    <div className="input-group">
+                      <input
+                        type="tel"
+                        className="form-control country-code"
+                        name="indicativo_pais"
+                        value={formData.indicativo_pais}
+                        onChange={handleChange}
+                      />
+
+                      <input
+                        type="tel"
+                        name="telefone"
+                        className="form-control"
+                        placeholder="912345678"
+                        value={formData.telefone}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-3">
                   <div className="custom-input-box p-2 px-3 d-flex align-items-center gap-2">
                     <div className="flex-grow-1">
-                      <label className="d-block text-muted tiny-label mb-0">
-                        Password
-                      </label>
+                      <label className="d-block text-muted tiny-label mb-0">Password</label>
 
                       <input
                         type={showPassword ? "text" : "password"}

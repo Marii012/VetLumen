@@ -15,6 +15,7 @@ const initialForm = {
   data_nascimento: "",
   peso: "",
   num_chip: "",
+  has_microchip: false,
   fotografia: "",
   cor: "",
   porte: "",
@@ -173,7 +174,7 @@ const AdminAddPetPage = () => {
         sexo: form.sexo || null,
         data_nascimento: form.data_nascimento || null,
         peso: form.peso === "" ? null : Number(form.peso),
-        num_chip: form.num_chip.trim(),
+        num_chip: form.has_microchip ? form.num_chip.trim() : null,
         fotografia: form.fotografia.trim(),
         id_species: Number(form.id_species),
         id_breed: form.id_breed ? Number(form.id_breed) : null,
@@ -333,14 +334,23 @@ const AdminAddPetPage = () => {
             </label>
 
             <label className="admin-pet-field">
-              <span>Número do chip</span>
-              <input
-                name="num_chip"
-                className="admin-pet-input"
-                value={form.num_chip}
-                onChange={handleChange}
-                placeholder="Chip"
-              />
+              <span>Microchip</span>
+              <div>
+                <label className="d-flex align-items-center gap-2">
+                  <input type="checkbox" name="has_microchip" checked={!!form.has_microchip} onChange={handleChange} />
+                  <span>Tem microchip?</span>
+                </label>
+
+                {form.has_microchip && (
+                  <input
+                    name="num_chip"
+                    className="admin-pet-input mt-2"
+                    value={form.num_chip}
+                    onChange={handleChange}
+                    placeholder="Número do microchip"
+                  />
+                )}
+              </div>
             </label>
 
             <label className="admin-pet-field">
@@ -367,12 +377,19 @@ const AdminAddPetPage = () => {
 
             <label className="admin-pet-field">
               <span>Porte</span>
-              <input
-                name="porte"
-                className="admin-pet-input"
-                value={form.porte}
-                onChange={handleChange}
-                placeholder="Porte"
+              <Select
+                options={[
+                  { value: '', label: 'Sem indicação' },
+                  { value: 'Pequeno', label: 'Pequeno' },
+                  { value: 'Médio', label: 'Médio' },
+                  { value: 'Grande', label: 'Grande' }
+                ]}
+                value={form.porte ? { value: form.porte, label: form.porte } : { value: '', label: 'Sem indicação' }}
+                onChange={(option) => setForm((prev) => ({ ...prev, porte: option?.value || '' }))}
+                className="admin-pet-select"
+                classNamePrefix="admin-pet-select"
+                isSearchable={false}
+                isClearable={false}
               />
             </label>
 

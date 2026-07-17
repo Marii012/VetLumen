@@ -51,11 +51,11 @@ function Footer() {
             </p>
 
             <div className="social-links d-flex justify-content-center justify-content-lg-start gap-3 fs-4">
-              <a href="#" className="footer-link" aria-label="Facebook">
+              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="footer-link" aria-label="Facebook">
                 <i className="bi bi-facebook"></i>
               </a>
 
-              <a href="#" className="footer-link" aria-label="Instagram">
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="footer-link" aria-label="Instagram">
                 <i className="bi bi-instagram"></i>
               </a>
             </div>

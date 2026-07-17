@@ -359,7 +359,7 @@ const PetDetails = () => {
             </div>
 
             <div>
-              <strong>Observações</strong>
+              <strong>Observações de saúde</strong>
               {editing ? (
                 <textarea className="inline-edit-textarea" name="observacoes" value={form.observacoes} onChange={handleChange} />
               ) : (

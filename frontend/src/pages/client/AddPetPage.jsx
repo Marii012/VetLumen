@@ -16,6 +16,7 @@ const AddPetPage = () => {
     estado: "Ativo",
     observacoes: "",
     fotografia: "",
+    porte: ""
   });
   const [speciesOptions, setSpeciesOptions] = useState([]);
   const [selectedSpecies, setSelectedSpecies] = useState(null);
@@ -70,8 +71,8 @@ const AddPetPage = () => {
   }, [selectedSpecies]);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((previous) => ({ ...previous, [name]: value }));
+    const { name, value, type, checked } = event.target;
+    setFormData((previous) => ({ ...previous, [name]: type === "checkbox" ? checked : value }));
   };
 
   const handleSubmit = async (event) => {
@@ -106,6 +107,8 @@ const AddPetPage = () => {
         estado: formData.estado || "Ativo",
         observacoes: formData.observacoes || null,
         fotografia: formData.fotografia || null,
+        porte: formData.porte || null,
+        num_chip: formData.has_microchip ? (formData.num_chip || null) : null,
         id_user: userId,
       });
 
@@ -247,8 +250,47 @@ const AddPetPage = () => {
             </div>
           </div>
 
+          <div className="add-pet-inline-row add-pet-porte-row">
+            <div className="profile-item add-pet-porte-field">
+              <label htmlFor="porte">Porte</label>
+              <Select
+                inputId="porte"
+                className="pet-form-select"
+                classNamePrefix="pet-form-select"
+                options={[
+                  { value: '', label: 'Sem indicação' },
+                  { value: 'Pequeno', label: 'Pequeno' },
+                  { value: 'Médio', label: 'Médio' },
+                  { value: 'Grande', label: 'Grande' }
+                ]}
+                value={formData.porte ? { value: formData.porte, label: formData.porte } : { value: '', label: 'Sem indicação' }}
+                onChange={(option) => setFormData((prev) => ({ ...prev, porte: option?.value || '' }))}
+                isSearchable={false}
+              />
+            </div>
+          </div>
+
+          <div className="add-pet-inline-row add-pet-microchip-row">
+            <div className="profile-item add-pet-microchip-field">
+              <label>
+                <input type="checkbox" name="has_microchip" checked={!!formData.has_microchip} onChange={handleChange} />{' '}
+                Tem microchip?
+              </label>
+
+              {formData.has_microchip && (
+                <input
+                  name="num_chip"
+                  value={formData.num_chip || ''}
+                  onChange={handleChange}
+                  className="profile-input mt-2"
+                  placeholder="Número do microchip"
+                />
+              )}
+            </div>
+          </div>
+
           <div className="profile-item full-width">
-            <label htmlFor="observacoes">Observações</label>
+            <label htmlFor="observacoes">Observações de saúde</label>
             <textarea id="observacoes" name="observacoes" value={formData.observacoes} onChange={handleChange} className="profile-input" rows="4" />
           </div>
 

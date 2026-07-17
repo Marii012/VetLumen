@@ -15,6 +15,7 @@ const initialForm = {
   data_nascimento: "",
   peso: "",
   num_chip: "",
+  has_microchip: false,
   fotografia: "",
   cor: "",
   porte: "",
@@ -70,7 +71,8 @@ const AdminEditPetPage = () => {
             estado: pet.estado || "Ativo",
             esterilizado: Boolean(pet.esterilizado),
             alergias: pet.alergias || "",
-            observacoes: pet.observacoes || ""
+            observacoes: pet.observacoes || "",
+            has_microchip: !!pet.num_chip
           });
         }
       } catch (err) {
@@ -123,7 +125,7 @@ const AdminEditPetPage = () => {
         sexo: form.sexo || null,
         data_nascimento: form.data_nascimento || null,
         peso: form.peso === "" ? null : Number(form.peso),
-        num_chip: form.num_chip.trim(),
+        num_chip: form.has_microchip ? form.num_chip.trim() : null,
         fotografia: form.fotografia.trim(),
         id_species: Number(form.id_species),
         id_breed: form.id_breed ? Number(form.id_breed) : null,
@@ -193,12 +195,121 @@ const AdminEditPetPage = () => {
             </label>
 
             <label className="admin-pet-field">
-              <span>Data de nascimento</span>
-              <input name="data_nascimento" type="date" className="admin-pet-input" value={form.data_nascimento} onChange={handleChange} />
+              <span>Microchip</span>
+              <div>
+                <label className="d-flex align-items-center gap-2">
+                  <input type="checkbox" name="has_microchip" checked={!!form.has_microchip} onChange={handleChange} />
+                  <span>Tem microchip?</span>
+                </label>
+
+                {form.has_microchip && (
+                  <input
+                    name="num_chip"
+                    className="admin-pet-input mt-2"
+                    value={form.num_chip}
+                    onChange={handleChange}
+                    placeholder="Número do microchip"
+                  />
+                )}
+              </div>
             </label>
 
+            <label className="admin-pet-field">
+              <span>Fotografia (URL)</span>
+              <input
+                name="fotografia"
+                className="admin-pet-input"
+                value={form.fotografia}
+                onChange={handleChange}
+                placeholder="https://..."
+              />
+            </label>
+
+            <label className="admin-pet-field">
+              <span>Cor</span>
+              <input
+                name="cor"
+                className="admin-pet-input"
+                value={form.cor}
+                onChange={handleChange}
+                placeholder="Cor"
+              />
+            </label>
+
+            <label className="admin-pet-field">
+              <span>Porte</span>
+              <Select
+                options={[
+                  { value: '', label: 'Sem indicação' },
+                  { value: 'Pequeno', label: 'Pequeno' },
+                  { value: 'Médio', label: 'Médio' },
+                  { value: 'Grande', label: 'Grande' }
+                ]}
+                value={form.porte ? { value: form.porte, label: form.porte } : { value: '', label: 'Sem indicação' }}
+                onChange={(option) => setForm((prev) => ({ ...prev, porte: option?.value || '' }))}
+                className="admin-pet-select"
+                classNamePrefix="admin-pet-select"
+                isSearchable={false}
+                isClearable={false}
+              />
+            </label>
+
+            <label className="admin-pet-field">
+              <span>Estado</span>
+              <Select
+                options={[{ value: 'Ativo', label: 'Ativo' }, { value: 'Inativo', label: 'Inativo' }]}
+                value={{ value: form.estado, label: form.estado }}
+                onChange={(option) => setForm((prev) => ({ ...prev, estado: option.value }))}
+                isSearchable={false}
+                className="admin-pet-select"
+                classNamePrefix="admin-pet-select"
+              />
+            </label>
+
+            <label className="admin-pet-checkbox admin-pet-field--full">
+              <input
+                type="checkbox"
+                name="esterilizado"
+                checked={form.esterilizado}
+                onChange={handleChange}
+              />
+              <span>Esterilizado</span>
+            </label>
+
+            <label className="admin-pet-field admin-pet-field--full">
+              <span>Alergias</span>
+              <textarea
+                name="alergias"
+                className="admin-pet-input admin-pet-textarea"
+                rows="3"
+                value={form.alergias}
+                onChange={handleChange}
+                placeholder="Alergias"
+              ></textarea>
+            </label>
+
+            <label className="admin-pet-field admin-pet-field--full">
+              <span>Observações</span>
+              <textarea
+                name="observacoes"
+                className="admin-pet-input admin-pet-textarea"
+                rows="3"
+                value={form.observacoes}
+                onChange={handleChange}
+                placeholder="Observações"
+              ></textarea>
+            </label>
+
+            {error && <p className="admin-pet-form-error">{error}</p>}
+
             <div className="admin-pet-form-actions">
-              <button type="submit" className="dashboard-btn pets-add-btn" disabled={saving}>{saving? 'A guardar...':'Guardar alterações'}</button>
+              <button type="button" className="dashboard-btn admin-pet-cancel" onClick={() => navigate("/admin/pets")} disabled={saving}>
+                Cancelar
+              </button>
+
+              <button type="submit" className="dashboard-btn" disabled={saving}>
+                {saving ? "A guardar..." : "Guardar alterações"}
+              </button>
             </div>
           </form>
         </section>

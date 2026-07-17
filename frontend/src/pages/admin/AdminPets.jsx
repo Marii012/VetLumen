@@ -302,8 +302,8 @@ const AdminPets = () => {
 					</label>
 
 					<label class="pet-swal-field pet-swal-field--full">
-						<span>Observações</span>
-						<textarea id="swal-notes" class="pet-swal-input pet-swal-textarea" rows="3" placeholder="Observações">${escapeHtml(formData.observacoes)}</textarea>
+						<span>Observações de saúde</span>
+						<textarea id="swal-notes" class="pet-swal-input pet-swal-textarea" rows="3" placeholder="Observações de saúde">${escapeHtml(formData.observacoes)}</textarea>
 					</label>
 				</div>
 			`,

@@ -8,6 +8,7 @@ const BookAppointment = () => {
   const navigate = useNavigate();
   const [pets, setPets] = useState([]);
   const [services, setServices] = useState([]);
+  const [appointments, setAppointments] = useState([]);
   const [veterinarians, setVeterinarians] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -27,10 +28,11 @@ const BookAppointment = () => {
         const storedUser = JSON.parse(localStorage.getItem("user") || "null");
         const userId = storedUser?.id_user;
 
-        const [petsResponse, servicesResponse, usersResponse] = await Promise.all([
+        const [petsResponse, servicesResponse, usersResponse, appointmentsResponse] = await Promise.all([
           userId ? api.get(`/pets/user/${userId}`) : Promise.resolve({ data: [] }),
           api.get("/services"),
           api.get("/users"),
+          api.get("/appointments")
         ]);
 
         const vetUsers = (usersResponse.data || []).filter((user) => {
@@ -41,6 +43,7 @@ const BookAppointment = () => {
         setPets(petsResponse.data || []);
         setServices(servicesResponse.data || []);
         setVeterinarians(vetUsers);
+        setAppointments(appointmentsResponse.data || []);
 
         if (vetUsers.length > 0) {
           setFormData((prev) => ({ ...prev, id_veterinario: String(vetUsers[0].id_user) }));
@@ -111,7 +114,14 @@ const BookAppointment = () => {
   };
 
   const petOptions = pets.map((pet) => ({ value: String(pet.id_pet), label: pet.nome }));
-  const serviceOptions = services.map((service) => ({ value: String(service.id_service), label: service.nome }));
+  const formatEuro = (value) => {
+    if (value == null || value === "") return "0.00€";
+    const num = Number(value);
+    if (Number.isNaN(num)) return "0.00€";
+    return `${num.toFixed(2)}€`;
+  };
+
+  const serviceOptions = services.map((service) => ({ value: String(service.id_service), label: `${service.nome} — ${formatEuro(service.preco)}` }));
   const veterinarianOptions = veterinarians.map((veterinarian) => ({
     value: String(veterinarian.id_user),
     label: `${veterinarian.first_name || ""} ${veterinarian.last_name || ""}`.trim() || veterinarian.email,
@@ -120,6 +130,43 @@ const BookAppointment = () => {
   const selectedPet = petOptions.find((option) => option.value === String(formData.id_pet)) || null;
   const selectedService = serviceOptions.find((option) => option.value === String(formData.id_service)) || null;
   const selectedVeterinarian = veterinarianOptions.find((option) => option.value === String(formData.id_veterinario)) || null;
+
+  const [availableTimes, setAvailableTimes] = useState([]);
+
+  // compute available times when date/vet/appointments change
+  useEffect(() => {
+    const computeTimes = () => {
+      if (!formData.data) {
+        setAvailableTimes([]);
+        return;
+      }
+
+      // generate hourly slots from 08:00 to 20:00
+      const slots = [];
+      for (let h = 8; h <= 20; h++) {
+        const hh = String(h).padStart(2, "0");
+        slots.push(`${hh}:00`);
+      }
+
+      // filter out slots that already have appointments on selected date and veterinarian
+      const filtered = slots.filter((slot) => {
+        return !appointments.some((a) => {
+          if (!a || !a.data) return false;
+          // match by date string (YYYY-MM-DD) and hora (HH:MM)
+          const sameDate = String(a.data) === String(formData.data) || (new Date(a.data)).toISOString().split("T")[0] === String(formData.data);
+          if (!sameDate) return false;
+          if (formData.id_veterinario) {
+            return String(a.id_veterinario) === String(formData.id_veterinario) && String(a.hora || "").startsWith(slot);
+          }
+          return String(a.hora || "").startsWith(slot);
+        });
+      });
+
+      setAvailableTimes(filtered);
+    };
+
+    computeTimes();
+  }, [formData.data, formData.id_veterinario, appointments]);
 
   return (
     <main className="appointments-container">
@@ -169,6 +216,9 @@ const BookAppointment = () => {
               isSearchable={false}
               placeholder="Selecione um serviço"
             />
+            {selectedService && (
+              <div className="service-price mt-2">Preço: {formatEuro((services.find(s=>String(s.id_service)===selectedService.value)||{}).preco)}</div>
+            )}
           </div>
 
           <div className="profile-item appointment-vet-field">
@@ -193,19 +243,12 @@ const BookAppointment = () => {
 
             <div className="profile-item appointment-time-field">
               <label htmlFor="hora">Hora</label>
-              <input
-                id="hora"
-                name="hora"
-                type="text"
-                value={formData.hora}
-                onChange={handleChange}
-                className="profile-input"
-                placeholder="HH:MM"
-                maxLength="5"
-                inputMode="numeric"
-                pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
-                required
-              />
+              <select id="hora" name="hora" value={formData.hora} onChange={handleChange} className="profile-input" required>
+                <option value="">Selecionar hora</option>
+                {availableTimes.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
             </div>
           </div>
 

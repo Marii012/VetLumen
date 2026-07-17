@@ -28,6 +28,9 @@ const EditPetPage = () => {
     estado: "Ativo",
     observacoes: "",
     fotografia: "",
+    porte: "",
+    num_chip: "",
+    has_microchip: false
   });
 
   const [speciesOptions, setSpeciesOptions] = useState([]);
@@ -138,6 +141,9 @@ const EditPetPage = () => {
           estado: pet.estado || "Ativo",
           observacoes: pet.observacoes || "",
           fotografia: pet.fotografia || "",
+          porte: pet.porte || "",
+          num_chip: pet.num_chip || "",
+          has_microchip: !!pet.num_chip
         });
 
 
@@ -187,18 +193,8 @@ const EditPetPage = () => {
 
 
   const handleChange = (event) => {
-
-    const {
-      name,
-      value
-    } = event.target;
-
-
-    setFormData((previous) => ({
-      ...previous,
-      [name]: value
-    }));
-
+    const { name, value, type, checked } = event.target;
+    setFormData((previous) => ({ ...previous, [name]: type === "checkbox" ? checked : value }));
   };
 
 
@@ -249,6 +245,10 @@ const EditPetPage = () => {
 
         fotografia:
           formData.fotografia || null,
+
+        porte: formData.porte || null,
+
+        num_chip: formData.has_microchip ? (formData.num_chip || null) : null,
 
       });
 
@@ -366,6 +366,45 @@ const EditPetPage = () => {
               required
             />
 
+          </div>
+
+          <div className="add-pet-inline-row add-pet-porte-row">
+            <div className="profile-item add-pet-porte-field">
+              <label>Porte</label>
+              <Select
+                inputId="porte"
+                className="pet-form-select"
+                classNamePrefix="pet-form-select"
+                options={[
+                  { value: '', label: 'Sem indicação' },
+                  { value: 'Pequeno', label: 'Pequeno' },
+                  { value: 'Médio', label: 'Médio' },
+                  { value: 'Grande', label: 'Grande' }
+                ]}
+                value={formData.porte ? { value: formData.porte, label: formData.porte } : { value: '', label: 'Sem indicação' }}
+                onChange={(option) => setFormData((prev) => ({ ...prev, porte: option?.value || '' }))}
+                isSearchable={false}
+              />
+            </div>
+          </div>
+
+          <div className="add-pet-inline-row add-pet-microchip-row">
+            <div className="profile-item add-pet-microchip-field">
+              <label>
+                <input type="checkbox" name="has_microchip" checked={!!formData.has_microchip} onChange={handleChange} />{' '}
+                Tem microchip?
+              </label>
+
+              {formData.has_microchip && (
+                <input
+                  name="num_chip"
+                  value={formData.num_chip || ''}
+                  onChange={handleChange}
+                  className="profile-input mt-2"
+                  placeholder="Número do microchip"
+                />
+              )}
+            </div>
           </div>
 
 
@@ -623,7 +662,7 @@ const EditPetPage = () => {
           <div className="profile-item full-width">
 
             <label>
-              Observações
+              Observações de saúde
             </label>
 
 
