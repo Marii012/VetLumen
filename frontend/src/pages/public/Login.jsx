@@ -58,42 +58,26 @@ function Login() {
   
       // Guardar a role (opcional, mas útil)
       localStorage.setItem("role", response.user.id_role);
-  
-      Swal.fire({
-        title: "Login efetuado!",
-        text: "Bem-vindo de volta ao VetLumen.",
-        icon: "success",
-        timer: 2000,
-        timerProgressBar: true,
-        showConfirmButton: false,
-        customClass: {
-          popup: "vetlumen-swal-popup",
-          title: "vetlumen-swal-title",
-          htmlContainer: "vetlumen-swal-text"
-        }
-      }).then(() => {
-  
-        switch (response.user.id_role) {
-  
-          case 1: 
-            navigate("/client/dashboard");
-            break;
-  
-          case 2: 
-            navigate("/vet/dashboard");
-            break;
-  
-          case 3: 
-            navigate("/admin/dashboard");
-            break;
-  
-          default:
-            navigate("/");
-            break;
-  
-        }
-  
-      });
+
+      switch (response.user.id_role) {
+
+        case 1:
+          navigate("/client/dashboard");
+          break;
+
+        case 2:
+          navigate("/vet/dashboard");
+          break;
+
+        case 3:
+          navigate("/admin/dashboard");
+          break;
+
+        default:
+          navigate("/");
+          break;
+
+      }
   
     } catch (error) {
   

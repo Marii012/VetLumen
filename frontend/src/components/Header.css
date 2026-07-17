@@ -186,6 +186,12 @@ header {
     width: 100%;
   }
 
+  .mobile-user-menu {
+    margin-top: 0.75rem;
+    padding-top: 0.9rem;
+    border-top: 2px solid #78cc28;
+  }
+
   .header-actions .btn {
     width: 100%;
   }

@@ -340,7 +340,7 @@ function Header() {
             >
               <i className="bi bi-person-fill-gear fs-4"></i>
 
-              Minha Conta
+              Conta
             </Link>
 
           </li>
@@ -357,7 +357,7 @@ function Header() {
             >
               <i className="bi bi-box-arrow-right fs-4"></i>
 
-              Sair
+              Terminar Sessão
             </button>
 
           </li>
@@ -370,8 +370,6 @@ function Header() {
 
       <div className="d-lg-none mobile-user-menu">
 
-        <hr />
-
         <Link
           to={getDashboardRoute()}
           className="mobile-user-link"
@@ -379,7 +377,7 @@ function Header() {
         >
           <i className="bi bi-person-fill-gear"></i>
 
-          Minha Conta
+          Conta
         </Link>
 
         <button
@@ -388,7 +386,7 @@ function Header() {
         >
           <i className="bi bi-box-arrow-right"></i>
 
-          Sair
+          Terminar Sessão
         </button>
 
       </div>
