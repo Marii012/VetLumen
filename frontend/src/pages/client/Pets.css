@@ -137,44 +137,105 @@
 /* AÇÕES */
 
 .pet-actions{
-
     display:flex;
-
     flex-direction:column;
-
     gap:10px;
-
     flex-shrink:0;
-
 }
 
 .pet-actions button{
-    width:42px;
-    height:42px;
-
-    border:none;
-    border-radius:12px;
-
-    background:#f8fafc;
-
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:38px;
+    height:38px;
+    padding:0;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
     cursor:pointer;
-
-    transition:.25s;
+    transition:.2s;
+    background:#f8fafc;
+    box-shadow:0 1px 2px rgba(15,23,42,0.04);
 }
 
 .pet-actions button i{
-    color:#64748b;
-    font-size:1.1rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    font-size:1rem;
+    line-height:1;
 }
 
-.edit-btn:hover{
-    background:#eaf8de;
-    color:#78cc28;
+.pet-actions .details-btn{
+    background:#eff6ff;
+    border-color:#bfdbfe;
+    color:#0284c7;
 }
 
-.delete-btn:hover{
-    background:#ffecec;
-    color:#dc3545;
+.pet-actions .history-btn{
+    background:#f5f3ff;
+    border-color:#ddd6fe;
+    color:#7c3aed;
+}
+
+.pet-actions .vaccine-btn{
+    background:#f7fee7;
+    border-color:#d9f99d;
+    color:#65a30d;
+}
+
+.pet-actions .edit-btn{
+    background:#eff6ff;
+    border-color:#bfdbfe;
+    color:#2563eb;
+}
+
+.pet-actions .delete-btn{
+    background:#fef2f2;
+    border-color:#fecaca;
+    color:#dc2626;
+}
+
+.pet-actions button:hover,
+.pet-actions button:focus-visible{
+    transform:translateY(-2px);
+}
+
+.pet-actions .details-btn:hover,
+.pet-actions .details-btn:focus-visible{
+    background:#e0f2fe;
+    border-color:#7dd3fc;
+    color:#0284c7;
+}
+
+.pet-actions .history-btn:hover,
+.pet-actions .history-btn:focus-visible{
+    background:#ede9fe;
+    border-color:#c4b5fd;
+    color:#7c3aed;
+}
+
+.pet-actions .vaccine-btn:hover,
+.pet-actions .vaccine-btn:focus-visible{
+    background:#ecfccb;
+    border-color:#bef264;
+    color:#65a30d;
+}
+
+.pet-actions .edit-btn:hover,
+.pet-actions .edit-btn:focus-visible{
+    background:#dbeafe;
+    border-color:#93c5fd;
+    color:#2563eb;
+}
+
+.pet-actions .delete-btn:hover,
+.pet-actions .delete-btn:focus-visible{
+    background:#fee2e2;
+    border-color:#fda4af;
+    color:#dc2626;
 }
 
 /* ==================================================

@@ -427,46 +427,10 @@ html, body {
 	border: 1px solid #e2e8f0;
 	font-size: 1rem;
 }
-.admin-pets .details-btn {
-	color: #0284c7;
-	border-color: #bfdbfe;
-	background: #eff6ff;
-}
-.admin-pets .history-btn {
-	color: #7c3aed;
-	border-color: #ddd6fe;
-	background: #f5f3ff;
-}
-.admin-pets .vaccine-btn {
-	color: #65a30d;
-	border-color: #d9f99d;
-	background: #f7fee7;
-}
 
 .admin-pets .pet-state-badge--ativo {
 	background: #e9f9dc;
 	color: #5ea91d;
-.admin-pets .details-btn:hover,
-.admin-pets .details-btn:focus-visible {
-	background: #e0f2fe;
-	border-color: #7dd3fc;
-	color: #0284c7;
-	transform: translateY(-1px);
-}
-.admin-pets .history-btn:hover,
-.admin-pets .history-btn:focus-visible {
-	background: #ede9fe;
-	border-color: #c4b5fd;
-	color: #7c3aed;
-	transform: translateY(-1px);
-}
-.admin-pets .vaccine-btn:hover,
-.admin-pets .vaccine-btn:focus-visible {
-	background: #ecfccb;
-	border-color: #bef264;
-	color: #65a30d;
-	transform: translateY(-1px);
-}
 	border: 1px solid #cfeeb3;
 }
 
@@ -488,34 +452,100 @@ html, body {
 	white-space: nowrap;
 }
 
-.admin-pets .details-btn,
-.admin-pets .history-btn,
-.admin-pets .vaccine-btn,
-.admin-pets .edit-pet-btn,
-.admin-pets .delete-pet-btn {
-	width: 48px;
-	height: 48px;
+.admin-pets .pets-actions button {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid transparent;
-	border-radius: 12px;
-	background: #f8fafc;
+	width: 38px;
+	height: 38px;
+	padding: 0;
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
 	cursor: pointer;
-	transition: .25s;
+	transition: .2s;
+	background: #f8fafc;
+	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 	flex-shrink: 0;
 }
 
-.admin-pets .edit-pet-btn {
-	color: #2563eb;
-	border-color: #bfdbfe;
+.admin-pets .pets-actions button i {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	font-size: 1rem;
+	line-height: 1;
+}
+
+.admin-pets .details-btn {
 	background: #eff6ff;
+	border-color: #bfdbfe;
+	color: #0284c7;
+}
+
+.admin-pets .history-btn {
+	background: #f5f3ff;
+	border-color: #ddd6fe;
+	color: #7c3aed;
+}
+
+.admin-pets .vaccine-btn {
+	background: #f7fee7;
+	border-color: #d9f99d;
+	color: #65a30d;
+}
+
+.admin-pets .edit-pet-btn {
+	background: #eff6ff;
+	border-color: #bfdbfe;
+	color: #2563eb;
 }
 
 .admin-pets .delete-pet-btn {
-	color: #dc2626;
-	border-color: #fecaca;
 	background: #fef2f2;
+	border-color: #fecaca;
+	color: #dc2626;
+}
+
+.admin-pets .pets-actions button:hover,
+.admin-pets .pets-actions button:focus-visible {
+	transform: translateY(-2px);
+}
+
+.admin-pets .details-btn:hover,
+.admin-pets .details-btn:focus-visible {
+	background: #e0f2fe;
+	border-color: #7dd3fc;
+	color: #0284c7;
+}
+
+.admin-pets .history-btn:hover,
+.admin-pets .history-btn:focus-visible {
+	background: #ede9fe;
+	border-color: #c4b5fd;
+	color: #7c3aed;
+}
+
+.admin-pets .vaccine-btn:hover,
+.admin-pets .vaccine-btn:focus-visible {
+	background: #ecfccb;
+	border-color: #bef264;
+	color: #65a30d;
+}
+
+.admin-pets .edit-pet-btn:hover,
+.admin-pets .edit-pet-btn:focus-visible {
+	background: #dbeafe;
+	border-color: #93c5fd;
+	color: #2563eb;
+}
+
+.admin-pets .delete-pet-btn:hover,
+.admin-pets .delete-pet-btn:focus-visible {
+	background: #fee2e2;
+	border-color: #fda4af;
+	color: #dc2626;
 }
 
 .admin-pets .edit-pet-btn:hover,
