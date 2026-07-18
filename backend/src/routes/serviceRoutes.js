@@ -5,44 +5,15 @@ const router = express.Router();
 const serviceController = require('../controllers/serviceController');
 
 
+router.get('/', serviceController.getAllServices);
 
-// LISTAR SERVIÇOS
-router.get(
-  '/',
-  serviceController.getAllServices
-);
+router.get('/:id', serviceController.getServiceById);
 
+router.post('/', serviceController.createService);
 
+router.put('/:id', serviceController.updateService);
 
-// OBTER SERVIÇO POR ID
-router.get(
-  '/:id',
-  serviceController.getServiceById
-);
-
-
-
-// CRIAR SERVIÇO
-router.post(
-  '/',
-  serviceController.createService
-);
-
-
-
-// ATUALIZAR SERVIÇO
-router.put(
-  '/:id',
-  serviceController.updateService
-);
-
-
-
-// ELIMINAR SERVIÇO
-router.delete(
-  '/:id',
-  serviceController.deleteService
-);
+router.delete('/:id', serviceController.deleteService);
 
 
 

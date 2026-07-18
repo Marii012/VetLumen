@@ -5,44 +5,15 @@ const router = express.Router();
 const productController = require('../controllers/productController');
 
 
+router.get('/', productController.getAllProducts);
 
-// LISTAR PRODUTOS
-router.get(
-  '/',
-  productController.getAllProducts
-);
+router.get('/:id', productController.getProductById);
 
+router.post('/', productController.createProduct);
 
+router.put('/:id', productController.updateProduct);
 
-// OBTER PRODUTO POR ID
-router.get(
-  '/:id',
-  productController.getProductById
-);
-
-
-
-// CRIAR PRODUTO
-router.post(
-  '/',
-  productController.createProduct
-);
-
-
-
-// ATUALIZAR PRODUTO
-router.put(
-  '/:id',
-  productController.updateProduct
-);
-
-
-
-// ELIMINAR PRODUTO
-router.delete(
-  '/:id',
-  productController.deleteProduct
-);
+router.delete('/:id', productController.deleteProduct);
 
 
 
