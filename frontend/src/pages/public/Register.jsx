@@ -73,7 +73,6 @@ function Register() {
 
     try {
 
-      // combine country code + phone into telefone for backend
       const payload = {
         ...formData,
         telefone: `${formData.indicativo_pais || ""} ${formData.telefone || ""}`.trim()
